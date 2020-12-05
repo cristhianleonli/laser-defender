@@ -1,19 +1,27 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.XR;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
 
+    #region Configuration
     [SerializeField] private float playerSpeed = 10f;
-    [SerializeField] float xPadding = 1f;
-    [SerializeField] float yPadding = 1f;
+    [SerializeField] private float xPadding = 1f;
+    [SerializeField] private float yPadding = 1f;
+    [SerializeField] private float projectileSpeed = 20f;
+    [SerializeField] private float projectileFiringPeriod = 0.05f;
+    [SerializeField] private GameObject laserPrefab;
+
+    private Coroutine firingCoroutine;
 
     private float minX;
     private float maxX;
     private float minY;
     private float maxY;
+    #endregion
 
     private void Start()
     {
@@ -23,6 +31,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Move();
+        Fire();
     }
 
     private void Move()
@@ -34,6 +43,29 @@ public class Player : MonoBehaviour
         var newYPosition = Mathf.Clamp(transform.position.y + deltaY, minY, maxY);
 
         transform.position = new Vector2(newXPosition, newYPosition);
+    }
+
+    private void Fire()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            firingCoroutine = StartCoroutine(FireContinuosly());
+        }
+
+        if (Input.GetButtonUp("Fire1"))
+        {
+            StopCoroutine(firingCoroutine);
+        }
+    }
+
+    private IEnumerator FireContinuosly()
+    {
+        while (true)
+        {
+            GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
+            laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
+            yield return new WaitForSeconds(projectileFiringPeriod);
+        }
     }
 
     private void SetupMoveBoundaries()
