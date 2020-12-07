@@ -9,8 +9,8 @@ public class WaveConfig : ScriptableObject
     [SerializeField] public GameObject PathPrefab;
     [SerializeField] public float TimeBetweenSpawns = 0.5f;
     [SerializeField] public float SpawnRandomFactor = 0.3f;
-    [SerializeField] public int NumberOfEnemies = 5;
-    [SerializeField] public float MoveSpeed = 2f;
+    [SerializeField] public float MoveSpeed = 5f;
+    [SerializeField] public int NumberOfEnemies = 10;
 
     public List<Transform> GetWaypoints()
     {

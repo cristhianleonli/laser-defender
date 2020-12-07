@@ -5,11 +5,11 @@ using UnityEngine;
 public class EnemyPathing : MonoBehaviour
 {
 
-    [SerializeField] WaveConfig waveConfig;
+    private WaveConfig waveConfig;
     private List<Transform> waypoints;
-    private float moveSpeed => waveConfig.MoveSpeed;
-
     private int waypointIndex = 0;
+
+    private float moveSpeed => waveConfig.MoveSpeed;
 
     void Start()
     {
@@ -20,6 +20,11 @@ public class EnemyPathing : MonoBehaviour
     void Update()
     {
         Move();
+    }
+
+    public void SetWaveConfig(WaveConfig config)
+    {
+        waveConfig = config;
     }
 
     private void Move()
