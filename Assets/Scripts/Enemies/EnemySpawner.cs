@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] List<WaveConfig> waveConfigs;
-    [SerializeField] private bool looping = false;
+    [SerializeField] private bool looping = true;
 
     IEnumerator Start()
     {
