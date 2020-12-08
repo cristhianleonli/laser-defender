@@ -1,19 +1,20 @@
 ﻿using System.Collections;
-using System.Runtime.InteropServices.ComTypes;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
+    #region Player Movement
+    private float playerSpeed = 10f;
+    private float xPadding = 1f;
+    private float yPadding = 1f;
+    private int health = 200;
+    #endregion
 
-    #region Configuration
-    [SerializeField] private float playerSpeed = 10f;
-    [SerializeField] private float xPadding = 1f;
-    [SerializeField] private float yPadding = 1f;
-    [SerializeField] private float projectileSpeed = 20f;
-    [SerializeField] private float projectileFiringPeriod = 0.05f;
+    # region Projectile
+    private float projectileSpeed = 20f;
+    private float projectileFiringPeriod = 0.2f;
     [SerializeField] private GameObject laserPrefab;
+    #endregion
 
     private Coroutine firingCoroutine;
 
@@ -21,7 +22,6 @@ public class Player : MonoBehaviour
     private float maxX;
     private float minY;
     private float maxY;
-    #endregion
 
     private void Start()
     {
@@ -32,6 +32,24 @@ public class Player : MonoBehaviour
     {
         Move();
         Fire();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        DamageDealer damageDealer = collision.gameObject.GetComponent<DamageDealer>();
+        if (!damageDealer) { return; };
+        ProcessHit(damageDealer);
+    }
+
+    private void ProcessHit(DamageDealer damageDealer)
+    {
+        health -= damageDealer.GetDamage();
+        damageDealer.Hit();
+
+        if (health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void Move()

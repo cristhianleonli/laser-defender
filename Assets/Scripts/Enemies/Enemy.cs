@@ -1,16 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] float healt = 100;
-    [SerializeField] float shotCounter;
-    [SerializeField] float minTimeBetweenShots = 0.2f;
-    [SerializeField] float maxTimeBetweenShots = 3f;
-    [SerializeField] GameObject projectile;
-    [SerializeField] float projectileSpeed = 3f;
+    private float health = 100;
+    private float shotCounter;
+    private float minTimeBetweenShots = 0.2f;
+    private float maxTimeBetweenShots = 3f;
+    private float projectileSpeed = 3f;
+    [SerializeField] private GameObject projectile;
 
     void Start()
     {
@@ -28,12 +25,14 @@ public class Enemy : MonoBehaviour
         if (shotCounter <= 0)
         {
             Fire();
+            shotCounter = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         DamageDealer damageDealer = collision.gameObject.GetComponent<DamageDealer>();
+        if (!damageDealer) { return; };
         ProcessHit(damageDealer);
     }
 
@@ -50,9 +49,10 @@ public class Enemy : MonoBehaviour
 
     private void ProcessHit(DamageDealer damageDealer)
     {
-        healt -= damageDealer.GetDamage();
+        health -= damageDealer.GetDamage();
+        damageDealer.Hit();
 
-        if (healt <= 0)
+        if (health <= 0)
         {
             Destroy(this.gameObject);
         }
