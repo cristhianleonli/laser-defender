@@ -4,11 +4,6 @@ namespace Utils
 {
     public static class Coordinates
     {
-        public static Vector3 GetMouseWorldPosition()
-        {
-            return GetMouseWorldPosition(Camera.main, Input.mousePosition);
-        }
-
         public static Vector3 GetMouseWorldPosition(Camera camera)
         {
             return GetMouseWorldPosition(camera, Input.mousePosition);

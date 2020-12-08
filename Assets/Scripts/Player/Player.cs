@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Projectile
-    private float projectileSpeed = 2f;
+    private float projectileSpeed = 1f;
     private float projectileFiringPeriod = 0.2f;
     [SerializeField] private GameObject laserPrefab;
     [SerializeField] private Transform firePoint;
@@ -96,9 +96,11 @@ public class Player : MonoBehaviour
             var borderPosition = ProjectPositionToBorder(mousePosition);
 
             var borderDistance = Geometry.HypotenuseLength(
-                borderPosition.x - laser.transform.position.x,
-                borderPosition.y - laser.transform.position.y
+                borderPosition.y - laser.transform.position.y,
+                borderPosition.x - laser.transform.position.x
             );
+
+            Debug.Log(borderDistance);
 
             var animationDuration = borderDistance * projectileSpeed / (maxX - minX);
 
@@ -126,6 +128,6 @@ public class Player : MonoBehaviour
     {
         var rotationAngle = Geometry.RotationAngle(mousePosition, transform.position);
         currentAngle = rotationAngle;
-        transform.eulerAngles = new Vector3(0, 0, rotationAngle);
+        transform.eulerAngles = new Vector3(0, 0, rotationAngle - 90);
     }
 }
