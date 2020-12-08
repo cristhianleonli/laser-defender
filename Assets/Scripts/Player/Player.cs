@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using AOT;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -10,12 +11,18 @@ public class Player : MonoBehaviour
     private int health = 200;
     #endregion
 
-    # region Projectile
+    #region Player rotation
+    private float currentAngle;
+    private Vector3 currentMousePosition;
+    #endregion
+
+    #region Projectile
     private float projectileSpeed = 20f;
     private float projectileFiringPeriod = 0.2f;
     [SerializeField] private GameObject laserPrefab;
     #endregion
 
+    private Camera gameCamera;
     private Coroutine firingCoroutine;
 
     private float minX;
@@ -25,11 +32,13 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        gameCamera = Camera.main;
         SetupMoveBoundaries();
     }
 
     private void Update()
     {
+        Rotate();
         Move();
         Fire();
     }
@@ -80,19 +89,40 @@ public class Player : MonoBehaviour
     {
         while (true)
         {
-            GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
-            laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
+            GameObject laser = Instantiate(laserPrefab, transform.position, transform.rotation) as GameObject;
+
+            laser.GetComponent<Rigidbody2D>().velocity = new Vector2(
+                currentMousePosition.x,
+                currentMousePosition.y
+            );
+
             yield return new WaitForSeconds(projectileFiringPeriod);
         }
     }
 
     private void SetupMoveBoundaries()
     {
-        Camera gameCamera = Camera.main;
         minX = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x + xPadding;
         maxX = gameCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x - xPadding;
 
         minY = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y + yPadding;
         maxY = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - yPadding;
+    }
+
+    private void Rotate()
+    {
+        var newTransform = transform.position;
+        var mousePosition = gameCamera.ScreenToWorldPoint(Input.mousePosition);
+
+        currentMousePosition = mousePosition;
+
+        Vector2 vec1 = new Vector2(newTransform.x, newTransform.y);
+        Vector2 vec2 = new Vector2(mousePosition.x, mousePosition.y);
+
+        Vector2 diference = vec2 - vec1;
+        float sign = (vec2.y < vec1.y) ? -1.0f : 1.0f;
+        var rotationAngle = Vector2.Angle(Vector2.right, diference) * sign;
+
+        transform.localEulerAngles = new Vector3(0, 0, rotationAngle - 90);
     }
 }

@@ -10,9 +10,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float projectileSpeed = 3f;
     [SerializeField] private GameObject projectile;
 
+    private float randomShootCounter => Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
+
     void Start()
     {
-        shotCounter = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
+        shotCounter = randomShootCounter;
     }
 
     void Update()
@@ -26,7 +28,7 @@ public class Enemy : MonoBehaviour
         if (shotCounter <= 0)
         {
             Fire();
-            shotCounter = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
+            shotCounter = randomShootCounter;
         }
     }
 
