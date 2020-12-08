@@ -1,6 +1,7 @@
 ﻿using System.Collections;
-using AOT;
+using DG.Tweening;
 using UnityEngine;
+using Utils;
 
 public class Player : MonoBehaviour
 {
@@ -13,17 +14,19 @@ public class Player : MonoBehaviour
 
     #region Player rotation
     private float currentAngle;
-    private Vector3 currentMousePosition;
     #endregion
 
     #region Projectile
-    private float projectileSpeed = 20f;
+    private float projectileSpeed = 2f;
     private float projectileFiringPeriod = 0.2f;
     [SerializeField] private GameObject laserPrefab;
+    [SerializeField] private Transform firePoint;
     #endregion
 
     private Camera gameCamera;
     private Coroutine firingCoroutine;
+
+    private Vector3 mousePosition => Coordinates.GetMouseWorldPosition(gameCamera);
 
     private float minX;
     private float maxX;
@@ -89,15 +92,25 @@ public class Player : MonoBehaviour
     {
         while (true)
         {
-            GameObject laser = Instantiate(laserPrefab, transform.position, transform.rotation) as GameObject;
+            GameObject laser = Instantiate(laserPrefab, firePoint.position, transform.rotation) as GameObject;
+            var borderPosition = ProjectPositionToBorder(mousePosition);
 
-            laser.GetComponent<Rigidbody2D>().velocity = new Vector2(
-                currentMousePosition.x,
-                currentMousePosition.y
+            var borderDistance = Geometry.HypotenuseLength(
+                borderPosition.x - laser.transform.position.x,
+                borderPosition.y - laser.transform.position.y
             );
 
+            var animationDuration = borderDistance * projectileSpeed / (maxX - minX);
+
+            laser.transform.transform.DOMove(borderPosition, animationDuration);
             yield return new WaitForSeconds(projectileFiringPeriod);
         }
+    }
+
+    private Vector3 ProjectPositionToBorder(Vector3 origin)
+    {
+        // TODO: project the vector to the border line
+        return new Vector3(11, 6, 0);
     }
 
     private void SetupMoveBoundaries()
@@ -111,18 +124,8 @@ public class Player : MonoBehaviour
 
     private void Rotate()
     {
-        var newTransform = transform.position;
-        var mousePosition = gameCamera.ScreenToWorldPoint(Input.mousePosition);
-
-        currentMousePosition = mousePosition;
-
-        Vector2 vec1 = new Vector2(newTransform.x, newTransform.y);
-        Vector2 vec2 = new Vector2(mousePosition.x, mousePosition.y);
-
-        Vector2 diference = vec2 - vec1;
-        float sign = (vec2.y < vec1.y) ? -1.0f : 1.0f;
-        var rotationAngle = Vector2.Angle(Vector2.right, diference) * sign;
-
-        transform.localEulerAngles = new Vector3(0, 0, rotationAngle - 90);
+        var rotationAngle = Geometry.RotationAngle(mousePosition, transform.position);
+        currentAngle = rotationAngle;
+        transform.eulerAngles = new Vector3(0, 0, rotationAngle);
     }
 }
