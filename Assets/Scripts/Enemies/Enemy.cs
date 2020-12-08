@@ -2,11 +2,12 @@
 
 public class Enemy : MonoBehaviour
 {
-    private float health = 100;
     private float shotCounter;
-    private float minTimeBetweenShots = 0.2f;
-    private float maxTimeBetweenShots = 3f;
-    private float projectileSpeed = 3f;
+
+    [SerializeField] private float health = 100;
+    [SerializeField] private float minTimeBetweenShots = 0.2f;
+    [SerializeField] private float maxTimeBetweenShots = 3f;
+    [SerializeField] private float projectileSpeed = 3f;
     [SerializeField] private GameObject projectile;
 
     void Start()
