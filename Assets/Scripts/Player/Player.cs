@@ -93,26 +93,39 @@ public class Player : MonoBehaviour
         while (true)
         {
             GameObject laser = Instantiate(laserPrefab, firePoint.position, transform.rotation) as GameObject;
-            var borderPosition = ProjectPositionToBorder(mousePosition);
+            var borderPosition = ProjectPositionToBorder(laser.transform.position, mousePosition);
 
             var borderDistance = Geometry.HypotenuseLength(
                 borderPosition.y - laser.transform.position.y,
                 borderPosition.x - laser.transform.position.x
             );
 
-            Debug.Log(borderDistance);
-
             var animationDuration = borderDistance * projectileSpeed / (maxX - minX);
 
-            laser.transform.transform.DOMove(borderPosition, animationDuration);
+            laser.transform.DOMove(borderPosition, animationDuration);
             yield return new WaitForSeconds(projectileFiringPeriod);
         }
     }
 
-    private Vector3 ProjectPositionToBorder(Vector3 origin)
+    private Vector3 ProjectPositionToBorder(Vector3 origin, Vector3 direction)
     {
+        int layer_mask = LayerMask.GetMask("Shredder");
+
+        var raycast = Physics2D.Raycast(
         // TODO: project the vector to the border line
-        return new Vector3(11, 6, 0);
+            new Vector2(origin.x, origin.y),
+            new Vector2(direction.x, direction.y)
+        );
+
+        var borderPosition = raycast.collider.transform.position;
+        //Debug.Log(raycast.collider.gameObject.layer);
+        //Debug.Log(origin);
+        //Debug.Log(direction);
+        //Debug.Log(borderPosition);
+        //Debug.Log("====");
+        //return new Vector3(borderPosition.x, borderPosition.y, 0);
+        Debug.DrawRay(new Vector2(origin.x, origin.y), new Vector2(direction.x, direction.y), Color.red);
+        return borderPosition;//new Vector3(10, 100, 0);
     }
 
     private void SetupMoveBoundaries()
