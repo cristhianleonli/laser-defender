@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
         while (true)
         {
             GameObject laser = Instantiate(laserPrefab, firePoint.position, transform.rotation) as GameObject;
-            var borderPosition = ProjectPositionToBorder(laser.transform.position, mousePosition);
+            var borderPosition = ProjectPositionToBorder(firePoint.position, mousePosition);
 
             var borderDistance = Geometry.HypotenuseLength(
                 borderPosition.y - laser.transform.position.y,
@@ -112,20 +112,13 @@ public class Player : MonoBehaviour
         int layer_mask = LayerMask.GetMask("Shredder");
 
         var raycast = Physics2D.Raycast(
-        // TODO: project the vector to the border line
             new Vector2(origin.x, origin.y),
-            new Vector2(direction.x, direction.y)
+            new Vector2(direction.x, direction.y), 50, layer_mask
         );
 
-        var borderPosition = raycast.collider.transform.position;
-        //Debug.Log(raycast.collider.gameObject.layer);
-        //Debug.Log(origin);
-        //Debug.Log(direction);
-        //Debug.Log(borderPosition);
-        //Debug.Log("====");
-        //return new Vector3(borderPosition.x, borderPosition.y, 0);
-        Debug.DrawRay(new Vector2(origin.x, origin.y), new Vector2(direction.x, direction.y), Color.red);
-        return borderPosition;//new Vector3(10, 100, 0);
+        Debug.DrawRay(origin, direction, Color.red, 3);
+        //Debug.Log(raycast.point);
+        return new Vector3(raycast.point.x, raycast.point.y, 0);
     }
 
     private void SetupMoveBoundaries()

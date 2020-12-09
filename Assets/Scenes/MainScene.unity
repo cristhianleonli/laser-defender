@@ -5099,6 +5099,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 974545914}
   - {fileID: 1946328599}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -5119,7 +5120,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &974545913
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5133,7 +5134,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 4.775382, y: 0}
+  m_Offset: {x: 14.728943, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5144,7 +5145,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.550764, y: 1}
+  m_Size: {x: 30.457886, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &974545914
 Transform:
@@ -5153,12 +5154,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 974545912}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -14.47, y: 8.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_Father: {fileID: 920708592}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1270836955
 GameObject:
@@ -10306,7 +10307,7 @@ GameObject:
   - component: {fileID: 1946328599}
   - component: {fileID: 1946328597}
   - component: {fileID: 1946328598}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10358,7 +10359,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 920708592}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4518110143479993732
 PrefabInstance:
@@ -10589,12 +10590,12 @@ PrefabInstance:
     - target: {fileID: 8780643194049356764, guid: b2499c688c9524c96b2b85513831e839,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.38
+      value: -1.41
       objectReference: {fileID: 0}
     - target: {fileID: 8780643194049356764, guid: b2499c688c9524c96b2b85513831e839,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.93
+      value: -0.92
       objectReference: {fileID: 0}
     - target: {fileID: 8780643194049356764, guid: b2499c688c9524c96b2b85513831e839,
         type: 3}

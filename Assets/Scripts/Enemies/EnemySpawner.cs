@@ -12,6 +12,7 @@ public class EnemySpawner : MonoBehaviour
     {
         // FIXME: remove
         waveConfigs.Clear();
+
         do
         {
             yield return StartCoroutine(SpawnWaves());
