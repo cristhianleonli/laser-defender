@@ -10,9 +10,6 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator Start()
     {
-        // FIXME: remove
-        waveConfigs.Clear();
-
         do
         {
             yield return StartCoroutine(SpawnWaves());

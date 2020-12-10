@@ -16,6 +16,11 @@ public class Player : MonoBehaviour
     private float currentAngle;
     #endregion
 
+    #region Jets
+    [SerializeField] private PlayerJet leftJet;
+    [SerializeField] private PlayerJet rightJet;
+    #endregion
+
     #region Projectile
     private float projectileSpeed = 1f;
     private float projectileFiringPeriod = 0.2f;
@@ -71,6 +76,16 @@ public class Player : MonoBehaviour
 
         var newXPosition = Mathf.Clamp(transform.position.x + deltaX, minX, maxX);
         var newYPosition = Mathf.Clamp(transform.position.y + deltaY, minY, maxY);
+
+        if (deltaX == 0 && deltaY == 0)
+        {
+            rightJet.FadeOut();
+            leftJet.FadeOut();
+        } else
+        {
+            rightJet.FadeIn();
+            leftJet.FadeIn();
+        }
 
         transform.position = new Vector2(newXPosition, newYPosition);
     }
