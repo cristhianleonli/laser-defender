@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverSound: {fileID: 8300000, guid: 23d32df1646fd49098ac0c9d6812f401, type: 3}
   clickSound: {fileID: 8300000, guid: c80643ef04a944ac4b78917366608b23, type: 3}
+  openLevelSound: {fileID: 8300000, guid: 04d46ddea50894e738e55922a88d2689, type: 3}
   backgroundLoop: {fileID: 0}

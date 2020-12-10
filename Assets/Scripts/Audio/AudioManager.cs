@@ -69,4 +69,9 @@ public class AudioManager : MonoBehaviour
     {
         PlaySound(audioData.hoverSound, effectsLevel);
     }
+
+    public void PlayOpenLevel()
+    {
+        PlaySound(audioData.openLevelSound, effectsLevel);
+    }
 }

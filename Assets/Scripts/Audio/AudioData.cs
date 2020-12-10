@@ -6,5 +6,6 @@ public class AudioData : ScriptableObject
 {
     public AudioClip hoverSound;
     public AudioClip clickSound;
+    public AudioClip openLevelSound;
     public AudioClip backgroundLoop;
 }
