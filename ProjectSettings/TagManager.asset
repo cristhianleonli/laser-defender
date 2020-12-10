@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Shredder
+  - MouseCursor
   layers:
   - Default
   - TransparentFX
@@ -45,6 +46,12 @@ TagManager:
   - name: Background
     uniqueID: 1112142123
     locked: 0
+  - name: Asteroids
+    uniqueID: 1982041023
+    locked: 0
   - name: Foreground
     uniqueID: 1216677483
+    locked: 0
+  - name: MouseCursor
+    uniqueID: 4047965445
     locked: 0

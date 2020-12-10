@@ -1,16 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MenuController : MonoBehaviour
 {
     [SerializeField] private LevelManager levelManager;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
+    private void Start()
     {
         
     }
