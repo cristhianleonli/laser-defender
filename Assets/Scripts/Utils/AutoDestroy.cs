@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MockObject : MonoBehaviour
+public class AutoDestroy : MonoBehaviour
 {
     void Start()
     {
