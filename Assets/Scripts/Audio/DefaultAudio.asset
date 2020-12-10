@@ -18,6 +18,9 @@ MonoBehaviour:
   backgroundLoop: {fileID: 0}
   emptyClickSound: {fileID: 8300000, guid: 6e5c693a151274034b17b678592a6c62, type: 3}
   closeLevelSound: {fileID: 8300000, guid: a8801d6d9ffec4f459c0412c83353556, type: 3}
-  playerLaser: {fileID: 8300000, guid: 4f1ca53cc43e74d329087a209df1d7b6, type: 3}
-  addShield: {fileID: 8300000, guid: 34aed370638a44d8da4b6db6053399d1, type: 3}
-  removeShield: {fileID: 8300000, guid: bcab268d7d3a143ceaec08f6825fe14a, type: 3}
+  playerLaserSound: {fileID: 8300000, guid: 88f7efb659634418ba1442c2f5235089, type: 3}
+  addShieldSound: {fileID: 8300000, guid: 34aed370638a44d8da4b6db6053399d1, type: 3}
+  removeShieldSound: {fileID: 8300000, guid: bcab268d7d3a143ceaec08f6825fe14a, type: 3}
+  hurtSound: {fileID: 8300000, guid: 6f0dbcd267cde4db7bf5a754d0f7f57a, type: 3}
+  hurtShieldSound: {fileID: 8300000, guid: 25624877629814da9833f2c24f1e4e18, type: 3}
+  pillSound: {fileID: 8300000, guid: 4b1f4039dd23f4167a42b7fa61dc265f, type: 3}

@@ -6,7 +6,8 @@ using Utils;
 public enum ObjectTag
 {
     PowerUpShield,
-    Player
+    Player,
+    PowerUpPill
 }
 
 public class Player : MonoBehaviour
@@ -15,14 +16,14 @@ public class Player : MonoBehaviour
     private float playerSpeed = 10f;
     private float xPadding = 1f;
     private float yPadding = 1f;
-    private int health = 200;
+    private int health = 3;
     #endregion
 
     #region Shield
     private bool hasShield = false;
     private int shieldHitCount = 0;
     private int maxShieldCount = 2;
-    private float shieldDuration = 4f;
+    private float shieldDuration = 6f;
     #endregion
 
     #region Jets
@@ -69,9 +70,22 @@ public class Player : MonoBehaviour
             AddShield();
         }
 
+        if (collision.gameObject.CompareTag($"{ObjectTag.PowerUpPill}"))
+        {
+            HealthDealer healthDealer = collision.gameObject.GetComponent<HealthDealer>();
+            RestoreHealth(healthDealer.GetHealth());
+        }
+
         DamageDealer damageDealer = collision.gameObject.GetComponent<DamageDealer>();
-        if (!damageDealer) { return; };
-        ProcessHit(damageDealer);
+        if (damageDealer) {
+            ProcessHit(damageDealer);
+        }
+    }
+
+    private void RestoreHealth(int health)
+    {
+        this.health += health;
+        AudioManager.Instance.PlayPill();
     }
 
     private void ProcessHit(DamageDealer damageDealer)

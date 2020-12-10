@@ -109,4 +109,9 @@ public class AudioManager : MonoBehaviour
     {
         PlaySound(audioData.hurtShieldSound, effectsLevel);
     }
+
+    public void PlayPill()
+    {
+        PlaySound(audioData.pillSound, effectsLevel);
+    }
 }
