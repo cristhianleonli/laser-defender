@@ -5,7 +5,8 @@ using Utils;
 
 public enum ObjectTag
 {
-    PowerUpShield
+    PowerUpShield,
+    Player
 }
 
 public class Player : MonoBehaviour
