@@ -18,9 +18,11 @@ public class Player : MonoBehaviour
     private int health = 200;
     #endregion
 
-    #region Player rotation
-    private float currentAngle = 0;
+    #region Shield
     private bool hasShield = false;
+    private int shieldHitCount = 0;
+    private int maxShieldCount = 2;
+    private float shieldDuration = 4f;
     #endregion
 
     #region Jets
@@ -74,13 +76,29 @@ public class Player : MonoBehaviour
 
     private void ProcessHit(DamageDealer damageDealer)
     {
-        health -= damageDealer.GetDamage();
-        damageDealer.Hit();
-
-        if (health <= 0)
+        if (hasShield)
         {
-            Destroy(this.gameObject);
+            shieldHitCount -= 1;
+
+            if (shieldHitCount <= 0)
+            {
+                RemoveShield();
+            }
+            AudioManager.Instance.PlayHurtShield();
+        } else
+        {
+            AudioManager.Instance.PlayHurt();
+            health -= damageDealer.GetDamage();
+            if (health <= 0)
+            {
+                // TODO: Present finish screen and proper animations
+                Destroy(this.gameObject);
+                return;
+            }
         }
+
+        // TODO: Play hurt animation
+        damageDealer.Hit();
     }
 
     private void Move()
@@ -151,7 +169,6 @@ public class Player : MonoBehaviour
     private void Rotate()
     {
         var rotationAngle = Geometry.RotationAngle(mousePosition, transform.position);
-        currentAngle = rotationAngle;
         transform.eulerAngles = new Vector3(0, 0, rotationAngle - 90);
     }
 
@@ -162,13 +179,29 @@ public class Player : MonoBehaviour
 
     private void AddShield()
     {
+        if (hasShield) { return; }
+
         shield.DOFade(1, 0.2f);
         hasShield = true;
+        shieldHitCount = maxShieldCount;
+        AudioManager.Instance.PlayAddShield();
+
+        StartCoroutine(ShieldTimeout());
     }
 
     private void RemoveShield()
     {
+        if (!hasShield) { return; }
+
         shield.DOFade(0, 0f);
         hasShield = false;
+        shieldHitCount = maxShieldCount;
+        AudioManager.Instance.PlayRemoveShield();
+    }
+
+    private IEnumerator ShieldTimeout()
+    {
+        yield return new WaitForSeconds(shieldDuration);
+        RemoveShield();
     }
 }

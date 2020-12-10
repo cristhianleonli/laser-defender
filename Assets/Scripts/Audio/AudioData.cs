@@ -11,5 +11,10 @@ public class AudioData : ScriptableObject
 
     public AudioClip emptyClickSound;
     public AudioClip closeLevelSound;
-    public AudioClip playerLaser;
+    public AudioClip playerLaserSound;
+
+    public AudioClip addShieldSound;
+    public AudioClip removeShieldSound;
+    public AudioClip hurtSound;
+    public AudioClip hurtShieldSound;
 }

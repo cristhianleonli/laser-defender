@@ -87,6 +87,26 @@ public class AudioManager : MonoBehaviour
 
     public void PlayerPlayerLaser()
     {
-        PlaySound(audioData.playerLaser, effectsLevel);
+        PlaySound(audioData.playerLaserSound, effectsLevel);
+    }
+
+    public void PlayAddShield()
+    {
+        PlaySound(audioData.addShieldSound, effectsLevel);
+    }
+
+    public void PlayRemoveShield()
+    {
+        PlaySound(audioData.removeShieldSound, effectsLevel);
+    }
+
+    public void PlayHurt()
+    {
+        PlaySound(audioData.hurtSound, effectsLevel);
+    }
+
+    public void PlayHurtShield()
+    {
+        PlaySound(audioData.hurtShieldSound, effectsLevel);
     }
 }
