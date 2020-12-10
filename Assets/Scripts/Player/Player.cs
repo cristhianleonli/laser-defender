@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     private float shieldDuration = 6f;
     #endregion
 
-    #region Jets
+    #region Extras
     [SerializeField] private PlayerJet leftJet;
     [SerializeField] private PlayerJet rightJet;
     [SerializeField] private SpriteRenderer shield;
@@ -90,6 +90,8 @@ public class Player : MonoBehaviour
 
     private void ProcessHit(DamageDealer damageDealer)
     {
+        CameraShake.Instance.ShakeCamera(5f, 0.1f);
+
         if (hasShield)
         {
             shieldHitCount -= 1;
@@ -111,7 +113,6 @@ public class Player : MonoBehaviour
             }
         }
 
-        // TODO: Play hurt animation
         damageDealer.Hit();
     }
 
