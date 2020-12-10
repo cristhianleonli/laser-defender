@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4181013469725700750
+--- !u!1 &3834620276824653037
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5769438789107733473}
-  - component: {fileID: 6898663630393485502}
-  - component: {fileID: 3718529457278762015}
-  - component: {fileID: 4880105075101473316}
-  - component: {fileID: 6451423082549071350}
-  - component: {fileID: 6099360146367464881}
+  - component: {fileID: 6855487197388955010}
+  - component: {fileID: 5804653175771866845}
+  - component: {fileID: 4370850763343540860}
+  - component: {fileID: 5515540650692056135}
+  - component: {fileID: 6249501319492322197}
+  - component: {fileID: 6600017517363809234}
   m_Layer: 13
-  m_Name: PillYellow
+  m_Name: Pill
   m_TagString: PowerUpPill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5769438789107733473
+--- !u!4 &6855487197388955010
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4181013469725700750}
+  m_GameObject: {fileID: 3834620276824653037}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.794, y: -1.279, z: 0}
+  m_LocalPosition: {x: 2.46, y: -2, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6898663630393485502
+--- !u!212 &5804653175771866845
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4181013469725700750}
+  m_GameObject: {fileID: 3834620276824653037}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 1216677483
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b3c2253777f9f49c58c40ad82a4e4e8f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 900078e84a2c34cc0a8f2d1aeead40ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,26 +85,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3718529457278762015
+--- !u!114 &4370850763343540860
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4181013469725700750}
+  m_GameObject: {fileID: 3834620276824653037}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 642112837f6a9446196a698b956d9964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!50 &4880105075101473316
+  pillType: 1
+--- !u!50 &5515540650692056135
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4181013469725700750}
+  m_GameObject: {fileID: 3834620276824653037}
   m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -118,13 +119,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!60 &6451423082549071350
+--- !u!60 &6249501319492322197
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4181013469725700750}
+  m_GameObject: {fileID: 3834620276824653037}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -151,13 +152,13 @@ PolygonCollider2D:
       - {x: 0.085320495, y: 0.0012522796}
       - {x: 0.09194186, y: 0.067776784}
       - {x: 0.067359366, y: 0.092961214}
---- !u!114 &6099360146367464881
+--- !u!114 &6600017517363809234
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4181013469725700750}
+  m_GameObject: {fileID: 3834620276824653037}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfdf953bb719e4b0eb31b594fc178a15, type: 3}
