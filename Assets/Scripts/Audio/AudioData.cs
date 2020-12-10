@@ -8,4 +8,8 @@ public class AudioData : ScriptableObject
     public AudioClip clickSound;
     public AudioClip openLevelSound;
     public AudioClip backgroundLoop;
+
+    public AudioClip emptyClickSound;
+    public AudioClip closeLevelSound;
+    public AudioClip playerLaser;
 }

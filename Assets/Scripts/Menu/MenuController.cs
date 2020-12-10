@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Data;
 
 public class MenuController : MonoBehaviour
 {
@@ -7,5 +8,10 @@ public class MenuController : MonoBehaviour
     private void Start()
     {
         
+    }
+
+    public void OpenLevel(LevelConfig config)
+    {
+
     }
 }

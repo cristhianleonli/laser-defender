@@ -1,6 +1,6 @@
 ﻿
 namespace Data {
-    public struct LevelConfig
+    public class LevelConfig
     {
         public int id;
         public bool isLocked;

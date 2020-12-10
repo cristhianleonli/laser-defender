@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Shredder
   - MouseCursor
+  - PowerUpShield
   layers:
   - Default
   - TransparentFX
@@ -17,10 +18,10 @@ TagManager:
   - 
   - Player
   - Enemy
-  - PlayerProjectile
-  - EnemyProjectile
+  - PlayerLaser
+  - EnemyLaser
   - Shredder
-  - 
+  - PowerUp
   - 
   - 
   - 
@@ -46,11 +47,14 @@ TagManager:
   - name: Background
     uniqueID: 1112142123
     locked: 0
-  - name: Asteroids
+  - name: Asteroid
     uniqueID: 1982041023
     locked: 0
   - name: Foreground
     uniqueID: 1216677483
+    locked: 0
+  - name: Player
+    uniqueID: 3301573543
     locked: 0
   - name: MouseCursor
     uniqueID: 4047965445

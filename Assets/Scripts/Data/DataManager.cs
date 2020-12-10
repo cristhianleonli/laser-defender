@@ -43,5 +43,10 @@ namespace Data
 
             return levels;
         }
+
+        public void Some()
+        {
+            levels[0].starCount = 1;
+        }
     }
 }

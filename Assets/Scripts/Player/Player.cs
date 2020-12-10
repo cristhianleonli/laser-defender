@@ -3,6 +3,11 @@ using DG.Tweening;
 using UnityEngine;
 using Utils;
 
+public enum ObjectTag
+{
+    PowerUpShield
+}
+
 public class Player : MonoBehaviour
 {
     #region Player Movement
@@ -13,18 +18,20 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Player rotation
-    private float currentAngle;
+    private float currentAngle = 0;
+    private bool hasShield = false;
     #endregion
 
     #region Jets
     [SerializeField] private PlayerJet leftJet;
     [SerializeField] private PlayerJet rightJet;
+    [SerializeField] private SpriteRenderer shield;
     #endregion
 
     #region Projectile
     private float projectileSpeed = 1f;
     private float projectileFiringPeriod = 0.2f;
-    [SerializeField] private GameObject laserPrefab;
+    [SerializeField] private PlayerLaser laserPrefab;
     [SerializeField] private Transform firePoint;
     #endregion
 
@@ -42,6 +49,7 @@ public class Player : MonoBehaviour
     {
         gameCamera = Camera.main;
         SetupMoveBoundaries();
+        SetupObjects();
     }
 
     private void Update()
@@ -53,6 +61,11 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.CompareTag($"{ObjectTag.PowerUpShield}"))
+        {
+            AddShield();
+        }
+
         DamageDealer damageDealer = collision.gameObject.GetComponent<DamageDealer>();
         if (!damageDealer) { return; };
         ProcessHit(damageDealer);
@@ -107,8 +120,8 @@ public class Player : MonoBehaviour
     {
         while (true)
         {
-            GameObject laser = Instantiate(laserPrefab, firePoint.position, transform.rotation) as GameObject;
-            var borderPosition = ProjectPositionToBorder(firePoint.position, mousePosition);
+            PlayerLaser laser = Instantiate(laserPrefab, firePoint.position, transform.rotation);
+            var borderPosition = new Vector3(mousePosition.x, mousePosition.y, 0);
 
             var borderDistance = Geometry.HypotenuseLength(
                 borderPosition.y - laser.transform.position.y,
@@ -116,24 +129,13 @@ public class Player : MonoBehaviour
             );
 
             var animationDuration = borderDistance * projectileSpeed / (maxX - minX);
+            AudioManager.Instance.PlayerPlayerLaser();
+            laser.transform
+                .DOMove(borderPosition, animationDuration)
+                .OnComplete(() => laser.StopFlying());
 
-            laser.transform.DOMove(borderPosition, animationDuration);
             yield return new WaitForSeconds(projectileFiringPeriod);
         }
-    }
-
-    private Vector3 ProjectPositionToBorder(Vector3 origin, Vector3 direction)
-    {
-        int layer_mask = LayerMask.GetMask("Shredder");
-
-        var raycast = Physics2D.Raycast(
-            new Vector2(origin.x, origin.y),
-            new Vector2(direction.x, direction.y), 50, layer_mask
-        );
-
-        Debug.DrawRay(origin, direction, Color.red, 3);
-        //Debug.Log(raycast.point);
-        return new Vector3(raycast.point.x, raycast.point.y, 0);
     }
 
     private void SetupMoveBoundaries()
@@ -150,5 +152,22 @@ public class Player : MonoBehaviour
         var rotationAngle = Geometry.RotationAngle(mousePosition, transform.position);
         currentAngle = rotationAngle;
         transform.eulerAngles = new Vector3(0, 0, rotationAngle - 90);
+    }
+
+    private void SetupObjects()
+    {
+        shield.DOFade(0, 0);
+    }
+
+    private void AddShield()
+    {
+        shield.DOFade(1, 0.2f);
+        hasShield = true;
+    }
+
+    private void RemoveShield()
+    {
+        shield.DOFade(0, 0f);
+        hasShield = false;
     }
 }

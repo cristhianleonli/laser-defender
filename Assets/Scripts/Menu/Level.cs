@@ -2,6 +2,7 @@
 using TMPro;
 using Data;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Level : MonoBehaviour
 {
@@ -28,21 +29,23 @@ public class Level : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (isHovering == false)
+        if (isHovering) return;
+
+        isHovering = true;
+        transform.localScale = new Vector3(1.005f, 1.005f, 0);
+
+        if (!config.isLocked)
         {
-            isHovering = true;
             AudioManager.Instance.PlayHover();
-            transform.localScale = new Vector3(1.005f, 1.005f, 0);
         }
     }
 
     private void OnMouseExit()
     {
-        if (isHovering)
-        {
-            isHovering = false;
-            transform.localScale = new Vector3(1f, 1f, 0);
-        }
+        if (isHovering == false) return;
+        
+        isHovering = false;
+        transform.localScale = new Vector3(1f, 1f, 0);
     }
 
     private void OnMouseOver()
@@ -55,7 +58,7 @@ public class Level : MonoBehaviour
 
             if (config.isLocked)
             {
-                AudioManager.Instance.PlayClick();
+                AudioManager.Instance.PlayEmptyClick();
             } else
             {
                 AudioManager.Instance.PlayOpenLevel();
@@ -78,6 +81,7 @@ public class Level : MonoBehaviour
 
     private void OpenLevel()
     {
-        // TODO: open the specific level
+        FindObjectOfType<MenuController>().OpenLevel(config);
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 }

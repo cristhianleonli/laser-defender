@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e2dbfe170d94d09a57a28ce8f93cae, type: 3}
   m_Name: DefaultAudio
   m_EditorClassIdentifier: 
-  hoverSound: {fileID: 8300000, guid: 23d32df1646fd49098ac0c9d6812f401, type: 3}
+  hoverSound: {fileID: 8300000, guid: a02bf25d49a9c40e3af154459b63973a, type: 3}
   clickSound: {fileID: 8300000, guid: c80643ef04a944ac4b78917366608b23, type: 3}
-  openLevelSound: {fileID: 8300000, guid: 04d46ddea50894e738e55922a88d2689, type: 3}
+  openLevelSound: {fileID: 8300000, guid: 15023bfa8b091400cb43a72be5911ef3, type: 3}
   backgroundLoop: {fileID: 0}
+  emptyClickSound: {fileID: 8300000, guid: 6e5c693a151274034b17b678592a6c62, type: 3}
+  closeLevelSound: {fileID: 8300000, guid: a8801d6d9ffec4f459c0412c83353556, type: 3}
+  playerLaser: {fileID: 8300000, guid: d7aaa39fdfe944c889e21848468b0781, type: 3}

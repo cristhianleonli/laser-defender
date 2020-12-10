@@ -65,6 +65,11 @@ public class AudioManager : MonoBehaviour
         PlaySound(audioData.clickSound, effectsLevel);
     }
 
+    public void PlayEmptyClick()
+    {
+        PlaySound(audioData.emptyClickSound, effectsLevel);
+    }
+
     public void PlayHover()
     {
         PlaySound(audioData.hoverSound, effectsLevel);
@@ -73,5 +78,15 @@ public class AudioManager : MonoBehaviour
     public void PlayOpenLevel()
     {
         PlaySound(audioData.openLevelSound, effectsLevel);
+    }
+
+    public void PlayCloseLevel()
+    {
+        PlaySound(audioData.closeLevelSound, effectsLevel);
+    }
+
+    public void PlayerPlayerLaser()
+    {
+        PlaySound(audioData.playerLaser, effectsLevel);
     }
 }
