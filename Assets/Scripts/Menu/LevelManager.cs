@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
     private void SetupLevels()
     {
         var children = GetComponentsInChildren<Level>();
-        var levelConfigs = DataManager.Instance.fetchAll();
+        var levelConfigs = DataManager.FetchLevels();
 
         for (int i = 0; i < children.Length; i++)
         {

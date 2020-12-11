@@ -1,5 +1,20 @@
 ﻿using UnityEngine;
 
+public enum SoundType
+{
+    Hurt,
+    Pill,
+    HurtShield,
+    AddShield,
+    RemoveShield,
+    Click,
+    EmptyClick,
+    Hover,
+    OpenLevel,
+    CloseLevel,
+    PlayerLaser
+}
+
 public class AudioManager : MonoBehaviour
 {
     public AudioSource backgroundSource;
@@ -49,69 +64,45 @@ public class AudioManager : MonoBehaviour
         backgroundSource.volume = soundLevel;
     }
 
-    public void PlayTestSound(int level)
+    public void PlaySound(SoundType sound)
     {
-        PlaySound(audioData.clickSound, level);
+        PlaySound(FetchClip(sound), effectsLevel);
+    }
+
+    private AudioClip FetchClip(SoundType sound)
+    {
+        switch (sound)
+        {
+            case SoundType.Hurt:
+                return audioData.hurtSound;
+            case SoundType.Pill:
+                return audioData.pillSound;
+            case SoundType.HurtShield:
+                return audioData.hurtShieldSound;
+            case SoundType.AddShield:
+                return audioData.addShieldSound;
+            case SoundType.RemoveShield:
+                return audioData.removeShieldSound;
+            case SoundType.Click:
+                return audioData.clickSound;
+            case SoundType.EmptyClick:
+                return audioData.emptyClickSound;
+            case SoundType.Hover:
+                return audioData.hoverSound;
+            case SoundType.OpenLevel:
+                return audioData.openLevelSound;
+            case SoundType.CloseLevel:
+                return audioData.closeLevelSound;
+            case SoundType.PlayerLaser:
+                return audioData.playerLaserSound;
+        }
+
+        return audioData.clickSound;
     }
 
     private void PlaySound(AudioClip audioClip, float level)
     {
         var soundLevel = level == 0 ? 0 : level / 10;
         effectsSource.PlayOneShot(audioClip, soundLevel);
-    }
-
-    public void PlayClick()
-    {
-        PlaySound(audioData.clickSound, effectsLevel);
-    }
-
-    public void PlayEmptyClick()
-    {
-        PlaySound(audioData.emptyClickSound, effectsLevel);
-    }
-
-    public void PlayHover()
-    {
-        PlaySound(audioData.hoverSound, effectsLevel);
-    }
-
-    public void PlayOpenLevel()
-    {
-        PlaySound(audioData.openLevelSound, effectsLevel);
-    }
-
-    public void PlayCloseLevel()
-    {
-        PlaySound(audioData.closeLevelSound, effectsLevel);
-    }
-
-    public void PlayerPlayerLaser()
-    {
-        PlaySound(audioData.playerLaserSound, effectsLevel);
-    }
-
-    public void PlayAddShield()
-    {
-        PlaySound(audioData.addShieldSound, effectsLevel);
-    }
-
-    public void PlayRemoveShield()
-    {
-        PlaySound(audioData.removeShieldSound, effectsLevel);
-    }
-
-    public void PlayHurt()
-    {
-        PlaySound(audioData.hurtSound, effectsLevel);
-    }
-
-    public void PlayHurtShield()
-    {
-        PlaySound(audioData.hurtShieldSound, effectsLevel);
-    }
-
-    public void PlayPill()
-    {
-        PlaySound(audioData.pillSound, effectsLevel);
     }
 }

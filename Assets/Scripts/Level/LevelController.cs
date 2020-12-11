@@ -18,9 +18,8 @@ public class LevelController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            DataManager.Instance.Some();
-            SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
-            AudioManager.Instance.PlayCloseLevel();
+            SceneManager.LoadScene(Constants.MenuSceneId, LoadSceneMode.Single);
+            AudioManager.Instance.PlaySound(SoundType.CloseLevel);
         }
     }
 }

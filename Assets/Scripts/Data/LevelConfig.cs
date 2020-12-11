@@ -3,13 +3,15 @@ namespace Data {
     public class LevelConfig
     {
         public int id;
-        public bool isLocked;
         public int starCount;
+        public bool isLocked;
+        public bool isPlayed;
 
-        public LevelConfig(int id, bool isLocked, int starCount) {
+        public LevelConfig(int id, int starCount, bool isLocked, bool isPlayed) {
             this.id = id;
-            this.isLocked = isLocked;
             this.starCount = starCount;
+            this.isLocked = isLocked;
+            this.isPlayed = isPlayed;
         }
 
         public string Identifier => $"{id}";

@@ -2,7 +2,6 @@
 using TMPro;
 using Data;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Level : MonoBehaviour
 {
@@ -36,7 +35,7 @@ public class Level : MonoBehaviour
 
         if (!config.isLocked)
         {
-            AudioManager.Instance.PlayHover();
+            AudioManager.Instance.PlaySound(SoundType.Hover);
         }
     }
 
@@ -58,10 +57,10 @@ public class Level : MonoBehaviour
 
             if (config.isLocked)
             {
-                AudioManager.Instance.PlayEmptyClick();
+                AudioManager.Instance.PlaySound(SoundType.EmptyClick);
             } else
             {
-                AudioManager.Instance.PlayOpenLevel();
+                AudioManager.Instance.PlaySound(SoundType.OpenLevel);
                 OpenLevel();
             }
         }
@@ -73,15 +72,39 @@ public class Level : MonoBehaviour
         lockIcon.gameObject.SetActive(config.isLocked);
         titleText.gameObject.SetActive(!config.isLocked);
 
-        var starsShouldBeVisible = !config.isLocked;
-        startA.gameObject.SetActive(starsShouldBeVisible);
-        startB.gameObject.SetActive(starsShouldBeVisible);
-        startC.gameObject.SetActive(starsShouldBeVisible);
+        if (config.isLocked || !config.isPlayed)
+        {
+            startA.gameObject.SetActive(false);
+            startB.gameObject.SetActive(false);
+            startC.gameObject.SetActive(false);
+            return;
+        }
+
+        Sprite goldStar = Resources.Load<Sprite>(Constants.GoldStar);
+        Sprite silverStar = Resources.Load<Sprite>(Constants.SilverStar);
+
+        startA.sprite = silverStar;
+        startB.sprite = silverStar;
+        startC.sprite = silverStar;
+
+        if (config.starCount == 1)
+        {
+            startA.sprite = goldStar;
+        }
+
+        if (config.starCount == 2)
+        {
+            startB.sprite = goldStar;
+        }
+
+        if (config.starCount == 3)
+        {
+            startC.sprite = goldStar;
+        }
     }
 
     private void OpenLevel()
     {
         FindObjectOfType<MenuController>().OpenLevel(config);
-        SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 }

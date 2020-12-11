@@ -2,51 +2,49 @@
 
 namespace Data
 {
-    public class DataManager
+    public static class DataManager
     {
-        private static DataManager instance;
-        public static DataManager Instance => instance ?? (instance = new DataManager());
 
-        private readonly List<LevelConfig> levels = new List<LevelConfig>();
-
-        public List<LevelConfig> fetchAll()
+        public static List<LevelConfig> FetchLevels()
         {
             // TODO: Read from db
-            levels.Add(new LevelConfig(1, false, 0));
-            levels.Add(new LevelConfig(2, false, 0));
-            levels.Add(new LevelConfig(3, false, 0));
-            levels.Add(new LevelConfig(4, false, 0));
-            levels.Add(new LevelConfig(5, false, 0));
-            levels.Add(new LevelConfig(6, false, 0));
-            levels.Add(new LevelConfig(7, false, 0));
-            levels.Add(new LevelConfig(8, true, 0));
-            levels.Add(new LevelConfig(9, true, 0));
-            levels.Add(new LevelConfig(10, true, 0));
-            levels.Add(new LevelConfig(11, true, 0));
-            levels.Add(new LevelConfig(12, true, 0));
-            levels.Add(new LevelConfig(13, true, 0));
-            levels.Add(new LevelConfig(14, true, 0));
-            levels.Add(new LevelConfig(15, true, 0));
-            levels.Add(new LevelConfig(16, true, 0));
-            levels.Add(new LevelConfig(17, true, 0));
-            levels.Add(new LevelConfig(18, true, 0));
-            levels.Add(new LevelConfig(19, true, 0));
-            levels.Add(new LevelConfig(20, true, 0));
-            levels.Add(new LevelConfig(21, true, 0));
-            levels.Add(new LevelConfig(22, true, 0));
-            levels.Add(new LevelConfig(23, true, 0));
-            levels.Add(new LevelConfig(24, true, 0));
-            levels.Add(new LevelConfig(25, true, 0));
-            levels.Add(new LevelConfig(26, true, 0));
-            levels.Add(new LevelConfig(27, true, 0));
-            levels.Add(new LevelConfig(28, true, 0));
+            List<LevelConfig> levels = new List<LevelConfig>();
+
+            levels.Add(new LevelConfig(1, 0, false, false));
+            levels.Add(new LevelConfig(2, 0, false, false));
+            levels.Add(new LevelConfig(3, 0, false, false));
+            levels.Add(new LevelConfig(4, 0, false, false));
+            levels.Add(new LevelConfig(5, 0, false, false));
+            levels.Add(new LevelConfig(6, 0, false, false));
+            levels.Add(new LevelConfig(7, 0, false, false));
+            levels.Add(new LevelConfig(8, 0, true, false));
+            levels.Add(new LevelConfig(9, 0, true, false));
+            levels.Add(new LevelConfig(10, 0, true, false));
+            levels.Add(new LevelConfig(11, 0, true, false));
+            levels.Add(new LevelConfig(12, 0, true, false));
+            levels.Add(new LevelConfig(13, 0, true, false));
+            levels.Add(new LevelConfig(14, 0, true, false));
+            levels.Add(new LevelConfig(15, 0, true, false));
+            levels.Add(new LevelConfig(16, 0, true, false));
+            levels.Add(new LevelConfig(17, 0, true, false));
+            levels.Add(new LevelConfig(18, 0, true, false));
+            levels.Add(new LevelConfig(19, 0, true, false));
+            levels.Add(new LevelConfig(20, 0, true, false));
+            levels.Add(new LevelConfig(21, 0, true, false));
+            levels.Add(new LevelConfig(22, 0, true, false));
+            levels.Add(new LevelConfig(23, 0, true, false));
+            levels.Add(new LevelConfig(24, 0, true, false));
+            levels.Add(new LevelConfig(25, 0, true, false));
+            levels.Add(new LevelConfig(26, 0, true, false));
+            levels.Add(new LevelConfig(27, 0, true, false));
+            levels.Add(new LevelConfig(28, 0, true, false));
 
             return levels;
         }
 
-        public void Some()
+        public static int GetCoins()
         {
-            levels[0].starCount = 1;
+            return 100;
         }
     }
 }

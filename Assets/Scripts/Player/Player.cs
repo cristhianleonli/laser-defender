@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
     private void RestoreHealth(int health)
     {
         this.health += health;
-        AudioManager.Instance.PlayPill();
+        AudioManager.Instance.PlaySound(SoundType.Pill);
     }
 
     private void ProcessHit(DamageDealer damageDealer)
@@ -100,10 +100,10 @@ public class Player : MonoBehaviour
             {
                 RemoveShield();
             }
-            AudioManager.Instance.PlayHurtShield();
+            AudioManager.Instance.PlaySound(SoundType.HurtShield);
         } else
         {
-            AudioManager.Instance.PlayHurt();
+            AudioManager.Instance.PlaySound(SoundType.Hurt);
             health -= damageDealer.GetDamage();
             if (health <= 0)
             {
@@ -163,7 +163,7 @@ public class Player : MonoBehaviour
             );
 
             var animationDuration = borderDistance * projectileSpeed / (maxX - minX);
-            AudioManager.Instance.PlayerPlayerLaser();
+            AudioManager.Instance.PlaySound(SoundType.PlayerLaser);
             laser.transform
                 .DOMove(borderPosition, animationDuration)
                 .OnComplete(() => laser.StopFlying());
@@ -199,7 +199,7 @@ public class Player : MonoBehaviour
         shield.DOFade(1, 0.2f);
         hasShield = true;
         shieldHitCount = maxShieldCount;
-        AudioManager.Instance.PlayAddShield();
+        AudioManager.Instance.PlaySound(SoundType.AddShield);
 
         StartCoroutine(ShieldTimeout());
     }
@@ -211,7 +211,7 @@ public class Player : MonoBehaviour
         shield.DOFade(0, 0f);
         hasShield = false;
         shieldHitCount = maxShieldCount;
-        AudioManager.Instance.PlayRemoveShield();
+        AudioManager.Instance.PlaySound(SoundType.RemoveShield);
     }
 
     private IEnumerator ShieldTimeout()
