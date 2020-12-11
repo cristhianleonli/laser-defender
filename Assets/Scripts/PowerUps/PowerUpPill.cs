@@ -12,7 +12,12 @@ public class PowerUpPill : PowerUp
 
     private void Start()
     {
+        SetupSprite();
+    }
+
+    private void SetupSprite()
+    {
         string resourceName = pillType == PillType.Blue ? "pill_blue" : "pill_yellow";
-        GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Assets/Sprites/PowerUps/" + resourceName);
+        GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/PowerUps/" + resourceName);
     }
 }

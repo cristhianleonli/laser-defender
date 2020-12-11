@@ -23,4 +23,4 @@ MonoBehaviour:
   removeShieldSound: {fileID: 8300000, guid: bcab268d7d3a143ceaec08f6825fe14a, type: 3}
   hurtSound: {fileID: 8300000, guid: 6f0dbcd267cde4db7bf5a754d0f7f57a, type: 3}
   hurtShieldSound: {fileID: 8300000, guid: 25624877629814da9833f2c24f1e4e18, type: 3}
-  pillSound: {fileID: 8300000, guid: 4b1f4039dd23f4167a42b7fa61dc265f, type: 3}
+  pillSound: {fileID: 8300000, guid: 06a9692bd712f4bb6a00163eb40d1ba7, type: 3}
