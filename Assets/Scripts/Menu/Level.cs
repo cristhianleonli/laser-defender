@@ -44,7 +44,7 @@ public class Level : MonoBehaviour
         if (isHovering == false) return;
         
         isHovering = false;
-        transform.localScale = new Vector3(1f, 1f, 0);
+        transform.DOScale(1f, 0.05f);
     }
 
     private void OnMouseOver()
@@ -52,7 +52,7 @@ public class Level : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             DOTween.Sequence()
-                    .Append(transform.DOScale(0.99f, 0.1f))
+                    .Append(transform.DOScale(0.99f, 0.05f))
                     .Append(transform.DOScale(1, 0.1f));
 
             if (config.isLocked)
