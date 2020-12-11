@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 5426242782269743719}
   - component: {fileID: 5874056669177691842}
   - component: {fileID: 8553377735951541240}
-  - component: {fileID: 7033790683478905689}
+  - component: {fileID: 5392249858891530540}
+  - component: {fileID: 8953326804375858238}
   m_Layer: 13
   m_Name: ShieldYellow
   m_TagString: PowerUpShield
@@ -131,7 +132,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &7033790683478905689
+--- !u!114 &5392249858891530540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,6 +141,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 4866294453596342262}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a924e1e5786540cc99d8163c4d3e731, type: 3}
+  m_Script: {fileID: 11500000, guid: 444133007e0024cd79b6f8cdb6d89d4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8953326804375858238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4866294453596342262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 444133007e0024cd79b6f8cdb6d89d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -60,3 +60,6 @@ TagManager:
   - name: MouseCursor
     uniqueID: 4047965445
     locked: 0
+  - name: Transition
+    uniqueID: 2531911495
+    locked: 0

@@ -6,15 +6,23 @@ public class MenuController : MonoBehaviour
 {
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private MenuCanvas menuCanvas;
+    [SerializeField] private SceneTransition transition;
+    [SerializeField] private Transform gameContainer;
 
     private void Start()
     {
         UpdateCanvas();
+        transition.TransitionIn(gameContainer);
     }
 
     public void OpenLevel(LevelConfig config)
     {
-        // TODO: make transition
+        // send config to Level screen
+        transition.TransitionOut(gameContainer, () => GoToLevelScreen());
+    }
+
+    private void GoToLevelScreen()
+    {
         SceneManager.LoadScene(Constants.LevelSceneId, LoadSceneMode.Single);
     }
 

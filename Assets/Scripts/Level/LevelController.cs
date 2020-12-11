@@ -4,9 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
+    [SerializeField] private SceneTransition transition;
+    [SerializeField] private Transform gameContainer;
+
     void Start()
     {
-        
+        transition.TransitionIn(gameContainer);
     }
 
     void Update()
