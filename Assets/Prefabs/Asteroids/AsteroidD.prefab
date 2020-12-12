@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 570986405803808163}
   - component: {fileID: 9082704839740130883}
   - component: {fileID: 1696011803808235680}
+  - component: {fileID: -3390582043772494923}
   m_Layer: 14
   m_Name: AsteroidD
   m_TagString: Untagged
@@ -162,3 +163,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &-3390582043772494923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557244306734427289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e66cd692e5d493aa1c55ba1fb65070, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1

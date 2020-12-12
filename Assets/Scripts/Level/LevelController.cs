@@ -1,11 +1,23 @@
-﻿using Data;
+﻿using System.Security.Cryptography;
+using Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+enum GameStatus
+{
+    Starting,
+    Started,
+    Paused,
+    Finished
+}
 
 public class LevelController : MonoBehaviour
 {
     [SerializeField] private SceneTransition sceneTransition;
     [SerializeField] private Transform gameContainer;
+    [SerializeField] private GameObject[] hearts;
+
+    private GameStatus gameStatus = GameStatus.Starting;
 
     void Start()
     {

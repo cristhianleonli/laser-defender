@@ -14,8 +14,8 @@ public class Player : MonoBehaviour
 {
     #region Player Movement
     private float playerSpeed = 10f;
-    private float xPadding = 1f;
-    private float yPadding = 1f;
+    private float xPadding = 0.7f;
+    private float yPadding = 0.7f;
     private int health = 3;
     #endregion
 
