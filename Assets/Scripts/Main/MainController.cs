@@ -16,7 +16,7 @@ public class MainController : MonoBehaviour
 
     public void OnStartButton()
     {
-        AudioManager.Instance.PlaySound(SoundType.Hover);
+        AudioManager.Instance.PlaySound(SoundType.Click);
         transitionRenderer.gameObject.SetActive(true);
         transitionRenderer
             .DOFade(1, 0.6f)

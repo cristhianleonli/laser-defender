@@ -17,6 +17,10 @@ public class Background : MonoBehaviour
     private void MoveBackground()
     {
         var mousePosition = Utils.Coordinates.GetMouseWorldPosition(Camera.main);
-        transform.position = new Vector3(mousePosition.x * movementFactor, mousePosition.y * movementFactor, 0);
+
+        float positionX = Mathf.Clamp(mousePosition.x * movementFactor, -1, 1);
+        float positionY = Mathf.Clamp(mousePosition.y * movementFactor, -1, 1);
+
+        transform.position = new Vector3(positionX, positionY);
     }
 }
