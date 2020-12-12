@@ -12,7 +12,8 @@ public enum SoundType
     Hover,
     OpenLevel,
     CloseLevel,
-    PlayerLaser
+    PlayerLaser,
+    AsteroidExplode
 }
 
 public class AudioManager : MonoBehaviour
@@ -95,6 +96,8 @@ public class AudioManager : MonoBehaviour
                 return audioData.closeLevelSound;
             case SoundType.PlayerLaser:
                 return audioData.playerLaserSound;
+            case SoundType.AsteroidExplode:
+                return audioData.explosionSound;
         }
 
         return audioData.clickSound;

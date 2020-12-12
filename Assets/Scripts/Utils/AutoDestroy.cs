@@ -6,6 +6,7 @@ public class AutoDestroy : MonoBehaviour
 {
     void Start()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

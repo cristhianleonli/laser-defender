@@ -27,15 +27,4 @@ public class MainController : MonoBehaviour
     {
         SceneManager.LoadScene(Constants.MenuSceneId, LoadSceneMode.Single);
     }
-
-    private void Update()
-    {
-        MoveBackground();
-    }
-
-    private void MoveBackground()
-    {
-        var mousePosition = Utils.Coordinates.GetMouseWorldPosition(Camera.main);
-        background.position = new Vector3(mousePosition.x * 0.01f, mousePosition.y * 0.01f, 0);
-    }
 }

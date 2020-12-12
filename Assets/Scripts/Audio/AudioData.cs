@@ -18,4 +18,5 @@ public class AudioData : ScriptableObject
     public AudioClip hurtSound;
     public AudioClip hurtShieldSound;
     public AudioClip pillSound;
+    public AudioClip explosionSound;
 }
