@@ -80,8 +80,8 @@ public class Level : MonoBehaviour
             return;
         }
 
-        Sprite goldStar = Resources.Load<Sprite>(Constants.GoldStar);
-        Sprite silverStar = Resources.Load<Sprite>(Constants.SilverStar);
+        Sprite goldStar = ImageLoader.GoldStar;
+        Sprite silverStar = ImageLoader.SilverStar;
 
         startA.sprite = silverStar;
         startB.sprite = silverStar;

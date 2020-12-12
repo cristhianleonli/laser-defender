@@ -17,7 +17,7 @@ public class PowerUpPill : PowerUp
 
     private void SetupSprite()
     {
-        string resourceName = pillType == PillType.Blue ? Constants.BluePill : Constants.YellowPill;
-        GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(resourceName);
+        Sprite sprite = pillType == PillType.Blue ? ImageLoader.BluePill : ImageLoader.YellowPill;
+        GetComponent<SpriteRenderer>().sprite = sprite;
     }
 }
