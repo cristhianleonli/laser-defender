@@ -4,7 +4,7 @@ namespace Utils
 {
     public class CameraShake : MonoBehaviour
     {
-        private Cinemachine.CinemachineVirtualCamera camera;
+        private Cinemachine.CinemachineVirtualCamera virtualCamera;
         private Cinemachine.CinemachineBasicMultiChannelPerlin perlin;
 
         private float shakeTimer;
@@ -14,8 +14,8 @@ namespace Utils
         private void Awake()
         {
             Instance = this;
-            camera = GetComponent<Cinemachine.CinemachineVirtualCamera>();
-            perlin = camera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
+            virtualCamera = GetComponent<Cinemachine.CinemachineVirtualCamera>();
+            perlin = virtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
         }
 
         public void ShakeCamera(float intensity, float time)

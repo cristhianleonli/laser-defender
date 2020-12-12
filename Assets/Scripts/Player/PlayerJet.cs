@@ -3,21 +3,21 @@ using UnityEngine;
 
 public class PlayerJet : MonoBehaviour
 {
-    private SpriteRenderer renderer;
+    private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
-        renderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         FadeOut();
     }
 
     public void FadeOut()
     {
-        renderer.DOFade(0, 0.3f);
+        spriteRenderer.DOFade(0, 0.3f);
     }
 
     public void FadeIn()
     {
-        renderer.DOFade(1, 0.3f);
+        spriteRenderer.DOFade(1, 0.3f);
     }
 }

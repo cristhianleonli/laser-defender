@@ -4,12 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
-    [SerializeField] private SceneTransition transition;
+    [SerializeField] private SceneTransition sceneTransition;
     [SerializeField] private Transform gameContainer;
 
     void Start()
     {
-        transition.TransitionIn(gameContainer);
+        sceneTransition.TransitionIn(gameContainer);
     }
 
     void Update()
@@ -22,8 +22,7 @@ public class LevelController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             AudioManager.Instance.PlaySound(SoundType.CloseLevel);
-            transition.TransitionOut(gameContainer, () => GoToMenu());
-
+            sceneTransition.TransitionOut(gameContainer, () => GoToMenu());
         }
     }
 

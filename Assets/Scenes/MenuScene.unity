@@ -894,7 +894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelManager: {fileID: 349882721}
   menuCanvas: {fileID: 1226813604}
-  transition: {fileID: 1043718764}
+  sceneTransition: {fileID: 1043718764}
   gameContainer: {fileID: 664988184}
 --- !u!4 &488048086
 Transform:
@@ -3129,11 +3129,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SceneTransition
-      objectReference: {fileID: 0}
-    - target: {fileID: 5153652917816462627, guid: e4f4b31dbc23a4c2f999ddbef8de1dd7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5153652917816462629, guid: e4f4b31dbc23a4c2f999ddbef8de1dd7,
         type: 3}

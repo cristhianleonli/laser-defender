@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 559bdd2849a9a4f23a48c07d4ac24aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transition: {fileID: 1898421781}
+  sceneTransition: {fileID: 1898421781}
   gameContainer: {fileID: 189853582}
 --- !u!4 &397110386
 Transform:
