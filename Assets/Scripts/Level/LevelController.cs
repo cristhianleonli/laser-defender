@@ -1,9 +1,9 @@
 ﻿using Constants;
-using Data;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-enum GameStatus
+public enum GameStatus
 {
     Starting,
     Started,
@@ -17,12 +17,20 @@ public class LevelController : MonoBehaviour
     [SerializeField] private Transform gameContainer;
     [SerializeField] private GameObject[] hearts;
 
-    private GameStatus gameStatus = GameStatus.Starting;
+    [SerializeField] private StartOverlay startOverlay;
+    [SerializeField] private PauseOverlay pauseOverlay;
+    [SerializeField] private EndOverlay endOverlay;
+
+    [SerializeField] private AsteroidSpawner asteroidSpawner;
+    [SerializeField] private Player player;
+
+    private GameStatus gameStatus;
 
     void Start()
     {
         sceneTransition.TransitionIn(gameContainer);
         SetUpObjects();
+        StartCountdown();
     }
 
     void Update()
@@ -30,10 +38,51 @@ public class LevelController : MonoBehaviour
         ShowPauseIfNeeded();
     }
 
+    private void StartCountdown() {
+        DOTween.Sequence()
+            .OnStart(() => startOverlay.SetTitle("3"))
+            .Append(startOverlay.FadeOutText())
+            .AppendCallback(() => startOverlay.SetTitle("2"))
+            .Append(startOverlay.FadeOutText())
+            .AppendCallback(() => startOverlay.SetTitle("1"))
+            .Append(startOverlay.FadeOutText())
+            .AppendCallback(() => startOverlay.SetTitle("START"))
+            .Append(startOverlay.FadeOutText())
+            .OnComplete(() => ResumeGame());
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        gameStatus = GameStatus.Started;
+
+        startOverlay.FadeOut();
+        pauseOverlay.FadeOut();
+
+        player.ResumeMoving();
+        asteroidSpawner.ResumeSpawning();
+    }
+
+    private void PauseGame()
+    {
+        Time.timeScale = 0;
+        gameStatus = GameStatus.Paused;
+
+        pauseOverlay.FadeIn();
+
+        player.StopMoving();
+        asteroidSpawner.StopSpawning();
+    }
+
     private void SetUpObjects()
     {
+        gameStatus = GameStatus.Starting;
         OnHealthUpdate(Player.MaxHealth);
+
+        // player events
         Player.OnHealthUpdate += OnHealthUpdate;
+        Player.OnWin += OnPlayerWin;
+        Player.OnLose+= OnPlayerLose;
     }
 
     private void ShowPauseIfNeeded()
@@ -41,7 +90,14 @@ public class LevelController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             AudioManager.Instance.PlaySound(SoundType.CloseLevel);
-            sceneTransition.TransitionOut(gameContainer, () => GoToMenu());
+
+            if (gameStatus == GameStatus.Paused)
+            {
+                ResumeGame();
+            } else if (gameStatus == GameStatus.Started)
+            {
+                PauseGame();
+            }
         }
     }
 
@@ -61,5 +117,26 @@ public class LevelController : MonoBehaviour
         if (health >= 2) { hearts[1].SetActive(true); }
         if (health >= 3) { hearts[2].SetActive(true); }
         if (health == 4) { hearts[3].SetActive(true); }
+    }
+
+    private void OnPlayerWin(int health)
+    {
+        EndGame();
+    }
+
+    private void OnPlayerLose(int health)
+    {
+        EndGame();
+    }
+
+    private void EndGame()
+    {
+        gameStatus = GameStatus.Finished;
+
+        endOverlay.FadeIn();
+        player.StopMoving();
+        asteroidSpawner.StopSpawning();
+
+        sceneTransition.TransitionOut(gameContainer, () => GoToMenu());
     }
 }

@@ -6,16 +6,32 @@ using Random = UnityEngine.Random;
 public class AsteroidSpawner : MonoBehaviour
 {
     [SerializeField] private Asteroid[] asteroidPrefabs;
-    
+    [SerializeField] private bool autoStart = true;
+
     private float minStartTime = 1f;
     private float maxStartTime = 1.5f;
 
     private float spawnInterval => Random.Range(minStartTime, maxStartTime);
     private Asteroid asteroidPrefab => asteroidPrefabs[Random.Range(0, asteroidPrefabs.Length - 1)];
 
+    private Coroutine spawningCoroutine;
+
     private void Start()
     {
-        StartCoroutine(SpawnAsteroids());
+        if (autoStart)
+        {
+            spawningCoroutine = StartCoroutine(SpawnAsteroids());
+        }
+    }
+
+    public void ResumeSpawning()
+    {
+        spawningCoroutine = StartCoroutine(SpawnAsteroids());
+    }
+
+    public void StopSpawning()
+    {
+        StopCoroutine(spawningCoroutine);
     }
 
     private IEnumerator SpawnAsteroids()

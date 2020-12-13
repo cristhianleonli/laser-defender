@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     private float playerSpeed = 10f;
     private float xPadding = 0.7f;
     private float yPadding = 0.7f;
+    private bool isPaused = true;
     #endregion
 
     #region Health
@@ -42,6 +43,8 @@ public class Player : MonoBehaviour
     #region events
     public delegate void PlayerAction(int health);
     public static event PlayerAction OnHealthUpdate;
+    public static event PlayerAction OnWin;
+    public static event PlayerAction OnLose;
     #endregion
 
     private void Start()
@@ -53,6 +56,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (isPaused) { return; }
         Rotate();
         Move();
         Fire();
@@ -60,6 +64,8 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (isPaused) { return; }
+
         if (collision.gameObject.CompareTag($"{Tags.PowerUpShield}"))
         {
             AddShield();
@@ -105,8 +111,9 @@ public class Player : MonoBehaviour
             health -= damageDealer.GetDamage();
             if (health <= 0)
             {
-                // TODO: Present finish screen and proper animations
                 OnHealthUpdate?.Invoke(0);
+                OnLose?.Invoke(0);
+
                 Destroy(this.gameObject);
                 return;
             }
@@ -229,4 +236,16 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(shieldDuration);
         RemoveShield();
     }
+
+    #region Game status
+    public void ResumeMoving()
+    {
+        isPaused = false;
+    }
+
+    public void StopMoving()
+    {
+        isPaused = true;
+    }
+    #endregion
 }
