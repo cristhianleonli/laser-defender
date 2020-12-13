@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
 
     private void ProcessHit(DamageDealer damageDealer)
     {
-        CameraShake.Instance.ShakeCamera(5f, 0.1f);
+        CameraShake.Instance.ShakeCamera(3f, 0.2f);
         
         if (hasShield)
         {
@@ -173,7 +173,9 @@ public class Player : MonoBehaviour
 
             // calculate animation duration of laser, from player to mouse position
             var animationDuration = borderDistance * projectileSpeed / (maxX - minX);
+
             AudioManager.Instance.PlaySound(SoundType.PlayerLaser);
+            CameraShake.Instance.ShakeCamera(0.5f, 0.1f);
 
             // animate
             laser.transform

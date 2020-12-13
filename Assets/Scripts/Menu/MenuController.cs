@@ -16,9 +16,10 @@ public class MenuController : MonoBehaviour
         sceneTransition.TransitionIn(gameContainer);
     }
 
+    // Called by each level panel
     public void OpenLevel(LevelConfig config)
     {
-        // TODO: send config to Level screen
+        LevelCreator.Instance.CurrentLevelConfig = config;
         sceneTransition.TransitionOut(gameContainer, () => GoToLevelScreen());
     }
 

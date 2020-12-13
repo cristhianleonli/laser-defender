@@ -1,4 +1,6 @@
-﻿using Constants;
+﻿using System.Collections;
+using Constants;
+using Data;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,7 +32,7 @@ public class LevelController : MonoBehaviour
     {
         sceneTransition.TransitionIn(gameContainer);
         SetUpObjects();
-        StartCountdown();
+        StartCoroutine(StartCountdown());
     }
 
     void Update()
@@ -38,7 +40,9 @@ public class LevelController : MonoBehaviour
         ShowPauseIfNeeded();
     }
 
-    private void StartCountdown() {
+    private IEnumerator StartCountdown() {
+        yield return new WaitForSeconds(1);
+
         DOTween.Sequence()
             .OnStart(() => startOverlay.SetTitle("3"))
             .Append(startOverlay.FadeOutText())
@@ -137,6 +141,6 @@ public class LevelController : MonoBehaviour
         player.StopMoving();
         asteroidSpawner.StopSpawning();
 
-        sceneTransition.TransitionOut(gameContainer, () => GoToMenu());
+        //sceneTransition.TransitionOut(gameContainer, () => GoToMenu());
     }
 }

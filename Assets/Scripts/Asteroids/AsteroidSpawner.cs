@@ -8,8 +8,8 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField] private Asteroid[] asteroidPrefabs;
     [SerializeField] private bool autoStart = true;
 
-    private float minStartTime = 1f;
-    private float maxStartTime = 1.5f;
+    [SerializeField] private float minStartTime = 1f;
+    [SerializeField] private float maxStartTime = 1.5f;
 
     private float spawnInterval => Random.Range(minStartTime, maxStartTime);
     private Asteroid asteroidPrefab => asteroidPrefabs[Random.Range(0, asteroidPrefabs.Length - 1)];
@@ -49,7 +49,7 @@ public class AsteroidSpawner : MonoBehaviour
             var gravity = Random.Range(-0.5f, 0.5f);
             asteroid.ApplyGravity(gravity);
 
-            var velocity = new Vector3(isRight ? -5 : 5, Random.Range(-3f, 3f), 0);
+            var velocity = new Vector3(isRight ? Random.Range(-3f, -5f) : Random.Range(3f, 5f), Random.Range(-3f, 3f), 0);
             asteroid.ApplyVelocity(velocity);
 
             yield return new WaitForSeconds(spawnInterval);
