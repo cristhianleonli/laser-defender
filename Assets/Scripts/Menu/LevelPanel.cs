@@ -3,7 +3,7 @@ using TMPro;
 using Data;
 using UnityEngine;
 
-public class Level : MonoBehaviour
+public class LevelPanel : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private SpriteRenderer background;
@@ -12,17 +12,20 @@ public class Level : MonoBehaviour
     [SerializeField] private SpriteRenderer startC;
     [SerializeField] private SpriteRenderer lockIcon;
 
+    public delegate void OnTappedEvent(Level level);
+    public event OnTappedEvent OnTapped;
+
     private bool isHovering = false;
-    private LevelConfig config;
+    private Level level;
 
     public void SetTitle(string title)
     {
         titleText.text = title;
     }
 
-    public void SetConfiguration(LevelConfig config)
+    public void SetLevel(Level level)
     {
-        this.config = config;
+        this.level = level;
         UpdateUI();
     }
 
@@ -33,7 +36,7 @@ public class Level : MonoBehaviour
         isHovering = true;
         transform.localScale = new Vector3(1.005f, 1.005f, 0);
 
-        if (!config.isLocked)
+        if (level.IsEnabled)
         {
             AudioManager.Instance.PlaySound(SoundType.Hover);
         }
@@ -42,7 +45,7 @@ public class Level : MonoBehaviour
     private void OnMouseExit()
     {
         if (isHovering == false) return;
-        
+
         isHovering = false;
         transform.DOScale(1f, 0.05f);
     }
@@ -55,24 +58,25 @@ public class Level : MonoBehaviour
                     .Append(transform.DOScale(0.99f, 0.05f))
                     .Append(transform.DOScale(1, 0.1f));
 
-            if (config.isLocked)
-            {
-                AudioManager.Instance.PlaySound(SoundType.EmptyClick);
-            } else
+            if (level.IsEnabled)
             {
                 AudioManager.Instance.PlaySound(SoundType.OpenLevel);
-                OpenLevel();
+                OnTapped?.Invoke(level);
+            }
+            else
+            {
+                AudioManager.Instance.PlaySound(SoundType.EmptyClick);
             }
         }
     }
 
     private void UpdateUI()
     {
-        titleText.text = config.Identifier;
-        lockIcon.gameObject.SetActive(config.isLocked);
-        titleText.gameObject.SetActive(!config.isLocked);
+        titleText.text = level.Identifier;
+        lockIcon.gameObject.SetActive(!level.IsEnabled);
+        titleText.gameObject.SetActive(level.IsEnabled);
 
-        if (config.isLocked || !config.isPlayed)
+        if (level.IsEnabled == false || level.IsPlayed)
         {
             startA.gameObject.SetActive(false);
             startB.gameObject.SetActive(false);
@@ -87,24 +91,19 @@ public class Level : MonoBehaviour
         startB.sprite = silverStar;
         startC.sprite = silverStar;
 
-        if (config.starCount == 1)
+        if (level.starCount == 1)
         {
             startA.sprite = goldStar;
         }
 
-        if (config.starCount == 2)
+        if (level.starCount == 2)
         {
             startB.sprite = goldStar;
         }
 
-        if (config.starCount == 3)
+        if (level.starCount == 3)
         {
             startC.sprite = goldStar;
         }
-    }
-
-    private void OpenLevel()
-    {
-        FindObjectOfType<MenuController>().OpenLevel(config);
     }
 }

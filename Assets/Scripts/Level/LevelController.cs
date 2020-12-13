@@ -82,6 +82,7 @@ public class LevelController : MonoBehaviour
     {
         gameStatus = GameStatus.Starting;
         OnHealthUpdate(Player.MaxHealth);
+        asteroidSpawner.SetConfiguration(LevelCreator.Instance.GetCurrentSpawnerConfiguration());
 
         // player events
         Player.OnHealthUpdate += OnHealthUpdate;

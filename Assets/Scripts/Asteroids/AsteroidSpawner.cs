@@ -3,18 +3,32 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public class SpawnerConfig
+{
+    public float minSpawnerFactor = 1;
+    public float maxSpawnerFactor = 1.5f;
+
+    public SpawnerConfig(float minSpawnerFactor, float maxSpawnerFactor)
+    {
+        this.minSpawnerFactor = minSpawnerFactor;
+        this.maxSpawnerFactor = maxSpawnerFactor;
+    }
+}
+
 public class AsteroidSpawner : MonoBehaviour
 {
     [SerializeField] private Asteroid[] asteroidPrefabs;
     [SerializeField] private bool autoStart = true;
 
-    [SerializeField] private float minStartTime = 1f;
-    [SerializeField] private float maxStartTime = 1.5f;
-
-    private float spawnInterval => Random.Range(minStartTime, maxStartTime);
-    private Asteroid asteroidPrefab => asteroidPrefabs[Random.Range(0, asteroidPrefabs.Length - 1)];
+    #region Spawner config
+    private SpawnerConfig spawnerConfig;
+    private float minStartTime => (spawnerConfig == null) ? 1f : spawnerConfig.minSpawnerFactor;
+    private float maxStartTime => (spawnerConfig == null) ? 1.5f : spawnerConfig.maxSpawnerFactor;
+    #endregion
 
     private Coroutine spawningCoroutine;
+    private Asteroid asteroidPrefab => asteroidPrefabs[Random.Range(0, asteroidPrefabs.Length - 1)];
+    private float spawnInterval => Random.Range(minStartTime, maxStartTime);
 
     private void Start()
     {
@@ -22,6 +36,11 @@ public class AsteroidSpawner : MonoBehaviour
         {
             spawningCoroutine = StartCoroutine(SpawnAsteroids());
         }
+    }
+
+    public void SetConfiguration(SpawnerConfig spawnerConfig)
+    {
+        this.spawnerConfig = spawnerConfig;
     }
 
     public void ResumeSpawning()

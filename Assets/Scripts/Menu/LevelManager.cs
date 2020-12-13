@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    private readonly List<Level> levels = new List<Level>();
+    private readonly List<LevelPanel> panels = new List<LevelPanel>();
 
     void Start()
     {
@@ -13,13 +13,19 @@ public class LevelManager : MonoBehaviour
 
     private void SetupLevels()
     {
-        var children = GetComponentsInChildren<Level>();
-        var levelConfigs = DataManager.FetchLevels();
+        var children = GetComponentsInChildren<LevelPanel>();
+        var levels = DataManager.FetchLevels();
 
         for (int i = 0; i < children.Length; i++)
         {
-            children[i].SetConfiguration(levelConfigs[i]);
-            levels.Add(children[i]);
+            children[i].SetLevel(levels[i]);
+            children[i].OnTapped += OnLevelPanelTapped;
+            panels.Add(children[i]);
         }
+    }
+
+    private void OnLevelPanelTapped(Level level)
+    {
+        FindObjectOfType<MenuController>().OpenLevel(level);
     }
 }

@@ -16,10 +16,10 @@ public class MenuController : MonoBehaviour
         sceneTransition.TransitionIn(gameContainer);
     }
 
-    // Called by each level panel
-    public void OpenLevel(LevelConfig config)
+    // Called by each LevelPanel
+    public void OpenLevel(Level level)
     {
-        LevelCreator.Instance.CurrentLevelConfig = config;
+        LevelCreator.Instance.CurrentLevel = level;
         sceneTransition.TransitionOut(gameContainer, () => GoToLevelScreen());
     }
 
@@ -30,7 +30,6 @@ public class MenuController : MonoBehaviour
 
     private void UpdateCanvas()
     {
-        var coins = DataManager.GetCoins();
-        menuCanvas.SetCoins(coins);
+        
     }
 }

@@ -1,50 +1,29 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Data
 {
     public static class DataManager
     {
 
-        public static List<LevelConfig> FetchLevels()
+        public static List<Level> FetchLevels()
         {
             // TODO: Read from db
-            List<LevelConfig> levels = new List<LevelConfig>();
+            List<Level> levels = new List<Level>();
 
-            levels.Add(new LevelConfig(1, 0, false, false));
-            levels.Add(new LevelConfig(2, 0, false, false));
-            levels.Add(new LevelConfig(3, 0, false, false));
-            levels.Add(new LevelConfig(4, 0, false, false));
-            levels.Add(new LevelConfig(5, 0, false, false));
-            levels.Add(new LevelConfig(6, 0, false, false));
-            levels.Add(new LevelConfig(7, 0, false, false));
-            levels.Add(new LevelConfig(8, 0, true, false));
-            levels.Add(new LevelConfig(9, 0, true, false));
-            levels.Add(new LevelConfig(10, 0, true, false));
-            levels.Add(new LevelConfig(11, 0, true, false));
-            levels.Add(new LevelConfig(12, 0, true, false));
-            levels.Add(new LevelConfig(13, 0, true, false));
-            levels.Add(new LevelConfig(14, 0, true, false));
-            levels.Add(new LevelConfig(15, 0, true, false));
-            levels.Add(new LevelConfig(16, 0, true, false));
-            levels.Add(new LevelConfig(17, 0, true, false));
-            levels.Add(new LevelConfig(18, 0, true, false));
-            levels.Add(new LevelConfig(19, 0, true, false));
-            levels.Add(new LevelConfig(20, 0, true, false));
-            levels.Add(new LevelConfig(21, 0, true, false));
-            levels.Add(new LevelConfig(22, 0, true, false));
-            levels.Add(new LevelConfig(23, 0, true, false));
-            levels.Add(new LevelConfig(24, 0, true, false));
-            levels.Add(new LevelConfig(25, 0, true, false));
-            levels.Add(new LevelConfig(26, 0, true, false));
-            levels.Add(new LevelConfig(27, 0, true, false));
-            levels.Add(new LevelConfig(28, 0, true, false));
+            for (var i = 0; i < 28; i++)
+            {
+                levels.Add(
+                    new Level(i, Random.Range(0, 4), 0, 0.1f, 0.5f, Random.Range(0, 80))
+                );
+            }
 
             return levels;
         }
 
-        public static int GetCoins()
+        public static int GetStarsCount()
         {
-            return 100;
+            return 5;
         }
     }
 }
