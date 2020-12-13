@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using Constants;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -25,6 +26,6 @@ public class MainController : MonoBehaviour
 
     private void GoToMenuScreen()
     {
-        SceneManager.LoadScene(Constants.MenuSceneId, LoadSceneMode.Single);
+        SceneManager.LoadScene(Strings.MenuSceneId, LoadSceneMode.Single);
     }
 }

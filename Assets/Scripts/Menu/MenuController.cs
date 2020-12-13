@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Data;
 using UnityEngine.SceneManagement;
+using Constants;
 
 public class MenuController : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class MenuController : MonoBehaviour
 
     private void GoToLevelScreen()
     {
-        SceneManager.LoadScene(Constants.LevelSceneId, LoadSceneMode.Single);
+        SceneManager.LoadScene(Strings.LevelSceneId, LoadSceneMode.Single);
     }
 
     private void UpdateCanvas()

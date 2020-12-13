@@ -2,13 +2,7 @@
 using DG.Tweening;
 using UnityEngine;
 using Utils;
-
-public enum ObjectTag
-{
-    PowerUpShield,
-    Player,
-    PowerUpPill
-}
+using Constants;
 
 public class Player : MonoBehaviour
 {
@@ -16,17 +10,18 @@ public class Player : MonoBehaviour
     private float playerSpeed = 10f;
     private float xPadding = 0.7f;
     private float yPadding = 0.7f;
-    private int health = 3;
     #endregion
 
-    #region Shield
+    #region Health
+    private int health;
     private bool hasShield = false;
     private int shieldHitCount = 0;
     private int maxShieldCount = 2;
     private float shieldDuration = 6f;
+    public static int MaxHealth = 3;
     #endregion
 
-    #region Extras
+    #region Add-ons
     [SerializeField] private PlayerJet leftJet;
     [SerializeField] private PlayerJet rightJet;
     [SerializeField] private SpriteRenderer shield;
@@ -41,19 +36,19 @@ public class Player : MonoBehaviour
 
     private Camera gameCamera;
     private Coroutine firingCoroutine;
-
+    private float minX, maxX, minY, maxY;
     private Vector3 mousePosition => Coordinates.GetMouseWorldPosition(gameCamera);
 
-    private float minX;
-    private float maxX;
-    private float minY;
-    private float maxY;
+    #region events
+    public delegate void PlayerAction(int health);
+    public static event PlayerAction OnHealthUpdate;
+    #endregion
 
     private void Start()
     {
         gameCamera = Camera.main;
         SetupMoveBoundaries();
-        SetupObjects();
+        SetUpObjects();
     }
 
     private void Update()
@@ -65,15 +60,15 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag($"{ObjectTag.PowerUpShield}"))
+        if (collision.gameObject.CompareTag($"{Tags.PowerUpShield}"))
         {
             AddShield();
         }
 
-        if (collision.gameObject.CompareTag($"{ObjectTag.PowerUpPill}"))
+        if (collision.gameObject.CompareTag($"{Tags.PowerUpPill}"))
         {
             HealthDealer healthDealer = collision.gameObject.GetComponent<HealthDealer>();
-            RestoreHealth(healthDealer.GetHealth());
+            IncreaseHealth(healthDealer.GetHealth());
         }
 
         DamageDealer damageDealer = collision.gameObject.GetComponent<DamageDealer>();
@@ -82,16 +77,18 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void RestoreHealth(int health)
+    private void IncreaseHealth(int amount)
     {
-        this.health += health;
+        // make sure health doesn't go above the maximum
+        health = (health + amount) > MaxHealth ? MaxHealth : (health + amount);
         AudioManager.Instance.PlaySound(SoundType.Pill);
+        OnHealthUpdate?.Invoke(health);
     }
 
     private void ProcessHit(DamageDealer damageDealer)
     {
         CameraShake.Instance.ShakeCamera(5f, 0.1f);
-
+        
         if (hasShield)
         {
             shieldHitCount -= 1;
@@ -100,6 +97,7 @@ public class Player : MonoBehaviour
             {
                 RemoveShield();
             }
+
             AudioManager.Instance.PlaySound(SoundType.HurtShield);
         } else
         {
@@ -108,11 +106,13 @@ public class Player : MonoBehaviour
             if (health <= 0)
             {
                 // TODO: Present finish screen and proper animations
+                OnHealthUpdate?.Invoke(0);
                 Destroy(this.gameObject);
                 return;
             }
         }
 
+        OnHealthUpdate?.Invoke(health);
         damageDealer.Hit();
     }
 
@@ -154,16 +154,21 @@ public class Player : MonoBehaviour
     {
         while (true)
         {
+            // create player laser
             PlayerLaser laser = Instantiate(laserPrefab, firePoint.position, transform.rotation);
             var borderPosition = new Vector3(mousePosition.x, mousePosition.y, 0);
 
+            // calculate the distance from player to mouse position
             var borderDistance = Geometry.HypotenuseLength(
                 borderPosition.y - laser.transform.position.y,
                 borderPosition.x - laser.transform.position.x
             );
 
+            // calculate animation duration of laser, from player to mouse position
             var animationDuration = borderDistance * projectileSpeed / (maxX - minX);
             AudioManager.Instance.PlaySound(SoundType.PlayerLaser);
+
+            // animate
             laser.transform
                 .DOMove(borderPosition, animationDuration)
                 .OnComplete(() => laser.StopFlying());
@@ -187,17 +192,22 @@ public class Player : MonoBehaviour
         transform.eulerAngles = new Vector3(0, 0, rotationAngle - 90);
     }
 
-    private void SetupObjects()
+    private void SetUpObjects()
     {
         shield.DOFade(0, 0);
+        health = MaxHealth;
+        OnHealthUpdate?.Invoke(health);
     }
 
     private void AddShield()
     {
         if (hasShield) { return; }
 
+        // make shield visible
         shield.DOFade(1, 0.2f);
         hasShield = true;
+
+        // restore shield hit count to max
         shieldHitCount = maxShieldCount;
         AudioManager.Instance.PlaySound(SoundType.AddShield);
 
