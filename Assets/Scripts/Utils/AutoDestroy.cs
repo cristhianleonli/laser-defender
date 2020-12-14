@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AutoDestroy : MonoBehaviour
 {
     void Start()
     {
-        //gameObject.SetActive(false);
         Destroy(gameObject);
     }
 }
