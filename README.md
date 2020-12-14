@@ -1,5 +1,7 @@
-# SPASHI
+# Spashi
+
+Asteroids-killer game
 
 | Main Screen | Menu Screen | Level Screen |
 | ------ | ------ | ------ |
-| ![full](scrennshots/screen1.png) | ![camera](screenshots/screen2.png) | ![full](main/screenshots/screen3.png) |
+| ![main](scrennshots/screen1.png) | ![menu](screenshots/screen2.png) | ![level](screenshots/screen3.png) |
