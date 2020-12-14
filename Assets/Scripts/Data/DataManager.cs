@@ -8,18 +8,13 @@ namespace Data
 
         public static List<Level> FetchLevels()
         {
-            // TODO: Read from db
+            // TODO: Read from db or any other persistance method
             List<Level> levels = new List<Level>();
 
-            levels.Add(new Level(0, 2, 1, 0, 0, 0));
-            levels.Add(new Level(1, 0, 1, 0, 0, 0));
-            levels.Add(new Level(2, 0, 1, 0, 0, 0));
-            levels.Add(new Level(3, 0, 1, 0, 0, 0));
-            levels.Add(new Level(4, 0, 1, 0, 0, 0));
-            levels.Add(new Level(5, 0, 1, 0, 0, 0));
-            levels.Add(new Level(6, 0, 1, 0, 0, 0));
+            levels.Add(new Level(0, 2, 1, 0.5f, 1, 0));
+            levels.Add(new Level(1, 2, 1, 0.1f, 0.2f, 0));
 
-            for (var i = 6; i < 28; i++)
+            for (var i = 2; i < 28; i++)
             {
                 levels.Add(
                     new Level(i, 0, 0, 0.1f, 0.5f, 28)
@@ -29,7 +24,7 @@ namespace Data
             return levels;
         }
 
-        public static int GetStarsCount()
+        public static int GetTotalStarsCount()
         {
             return 5;
         }

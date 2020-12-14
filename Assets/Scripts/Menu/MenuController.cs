@@ -6,13 +6,11 @@ using Constants;
 public class MenuController : MonoBehaviour
 {
     [SerializeField] private LevelManager levelManager;
-    [SerializeField] private MenuCanvas menuCanvas;
     [SerializeField] private SceneTransition sceneTransition;
     [SerializeField] private Transform gameContainer;
 
     private void Start()
     {
-        UpdateCanvas();
         sceneTransition.TransitionIn(gameContainer);
     }
 
@@ -26,10 +24,5 @@ public class MenuController : MonoBehaviour
     private void GoToLevelScreen()
     {
         SceneManager.LoadScene(Strings.LevelSceneId, LoadSceneMode.Single);
-    }
-
-    private void UpdateCanvas()
-    {
-        
     }
 }

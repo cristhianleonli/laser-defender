@@ -21,7 +21,7 @@ namespace Data
         }
 
         public string Identifier => $"{id + 1}";
-        public bool IsEnabled => DataManager.GetStarsCount() >= starsRequired;
+        public bool IsEnabled => DataManager.GetTotalStarsCount() >= starsRequired;
         public bool IsPlayed => playedTimes > 0;
 
         override public string ToString()

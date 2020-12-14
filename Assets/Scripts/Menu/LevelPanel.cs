@@ -76,7 +76,7 @@ public class LevelPanel : MonoBehaviour
         lockIcon.gameObject.SetActive(!level.IsEnabled);
         titleText.gameObject.SetActive(level.IsEnabled);
 
-        if (level.IsEnabled == false || level.IsPlayed)
+        if (level.IsEnabled == false || level.IsPlayed == false)
         {
             startA.gameObject.SetActive(false);
             startB.gameObject.SetActive(false);
