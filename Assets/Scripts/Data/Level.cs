@@ -20,7 +20,7 @@ namespace Data
             this.starsRequired = starsRequired;
         }
 
-        public string Identifier => $"{id}";
+        public string Identifier => $"{id + 1}";
         public bool IsEnabled => DataManager.GetStarsCount() >= starsRequired;
         public bool IsPlayed => playedTimes > 0;
 

@@ -11,10 +11,18 @@ namespace Data
             // TODO: Read from db
             List<Level> levels = new List<Level>();
 
-            for (var i = 0; i < 28; i++)
+            levels.Add(new Level(0, 2, 1, 0, 0, 0));
+            levels.Add(new Level(1, 0, 1, 0, 0, 0));
+            levels.Add(new Level(2, 0, 1, 0, 0, 0));
+            levels.Add(new Level(3, 0, 1, 0, 0, 0));
+            levels.Add(new Level(4, 0, 1, 0, 0, 0));
+            levels.Add(new Level(5, 0, 1, 0, 0, 0));
+            levels.Add(new Level(6, 0, 1, 0, 0, 0));
+
+            for (var i = 6; i < 28; i++)
             {
                 levels.Add(
-                    new Level(i, Random.Range(0, 4), 0, 0.1f, 0.5f, Random.Range(0, 80))
+                    new Level(i, 0, 0, 0.1f, 0.5f, 28)
                 );
             }
 
