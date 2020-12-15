@@ -14,14 +14,6 @@ public class Asteroid : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
-    private void OnMouseOver()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Explode();
-        }
-    }
-
     private IEnumerator AutoDestroy()
     {
         yield return new WaitForSeconds(0.3f);
