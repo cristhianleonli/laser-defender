@@ -62,7 +62,7 @@ public class LevelPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         lockIcon.gameObject.SetActive(!level.IsEnabled);
         titleText.gameObject.SetActive(level.IsEnabled);
 
-        if (level.IsEnabled == false || level.IsPlayed == false)
+        if (level.IsEnabled == false)
         {
             startA.gameObject.SetActive(false);
             startB.gameObject.SetActive(false);

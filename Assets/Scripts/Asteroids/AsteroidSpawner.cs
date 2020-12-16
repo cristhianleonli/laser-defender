@@ -1,19 +1,8 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using Data;
 using Random = UnityEngine.Random;
-
-public class SpawnerConfig
-{
-    public float minSpawnerFactor = 1;
-    public float maxSpawnerFactor = 1.5f;
-
-    public SpawnerConfig(float minSpawnerFactor, float maxSpawnerFactor)
-    {
-        this.minSpawnerFactor = minSpawnerFactor;
-        this.maxSpawnerFactor = maxSpawnerFactor;
-    }
-}
 
 public class AsteroidSpawner : MonoBehaviour
 {
@@ -21,9 +10,9 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField] private bool autoStart = true;
 
     #region Spawner config
-    private SpawnerConfig spawnerConfig;
-    private float minStartTime => (spawnerConfig == null) ? 1f : spawnerConfig.minSpawnerFactor;
-    private float maxStartTime => (spawnerConfig == null) ? 1.5f : spawnerConfig.maxSpawnerFactor;
+    private SpawnConfig spawnConfig;
+    private float minStartTime => (spawnConfig == null) ? 1f : spawnConfig.minSpawnerFactor;
+    private float maxStartTime => (spawnConfig == null) ? 1.5f : spawnConfig.maxSpawnerFactor;
     #endregion
 
     private Coroutine spawningCoroutine;
@@ -38,9 +27,9 @@ public class AsteroidSpawner : MonoBehaviour
         }
     }
 
-    public void SetConfiguration(SpawnerConfig spawnerConfig)
+    public void SetConfiguration(SpawnConfig spawnConfig)
     {
-        this.spawnerConfig = spawnerConfig;
+        this.spawnConfig = spawnConfig;
     }
 
     public void ResumeSpawning()

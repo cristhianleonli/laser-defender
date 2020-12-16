@@ -32,7 +32,7 @@ public class LevelController : MonoBehaviour
     {
         sceneTransition.TransitionIn(gameContainer);
         SetUpObjects();
-        StartCoroutine(StartCountdown());
+        StartCountdown();
     }
 
     void Update()
@@ -40,10 +40,9 @@ public class LevelController : MonoBehaviour
         ShowPauseIfNeeded();
     }
 
-    private IEnumerator StartCountdown() {
-        yield return new WaitForSeconds(1);
-
+    private void StartCountdown() {
         DOTween.Sequence()
+            .SetDelay(1)
             .OnStart(() => startOverlay.SetTitle("3"))
             .Append(startOverlay.FadeOutText())
             .AppendCallback(() => startOverlay.SetTitle("2"))
@@ -82,7 +81,7 @@ public class LevelController : MonoBehaviour
     {
         gameStatus = GameStatus.Starting;
         OnHealthUpdate(Player.MaxHealth);
-        asteroidSpawner.SetConfiguration(LevelCreator.Instance.GetCurrentSpawnerConfiguration());
+        asteroidSpawner.SetConfiguration(LevelCreator.Instance.GetCurrentSpawnConfig());
 
         // player events
         Player.OnHealthUpdate += OnHealthUpdate;

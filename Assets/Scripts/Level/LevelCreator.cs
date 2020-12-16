@@ -19,15 +19,12 @@ public class LevelCreator: MonoBehaviour
         }
     }
 
-    public SpawnerConfig GetCurrentSpawnerConfiguration() {
+    public SpawnConfig GetCurrentSpawnConfig() {
         if (CurrentLevel == null)
         {
-            return new SpawnerConfig(1f, 1.5f);
+            return SpawnConfig.defaultValues();
         }
 
-        return new SpawnerConfig(
-            CurrentLevel.minSpawnerFactor,
-            CurrentLevel.maxSpawnerFactor
-        );
+        return CurrentLevel.spawnConfig;
     }
 }
