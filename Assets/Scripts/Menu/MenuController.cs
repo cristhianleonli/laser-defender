@@ -5,7 +5,6 @@ using Constants;
 
 public class MenuController : MonoBehaviour
 {
-    [SerializeField] private LevelManager levelManager;
     [SerializeField] private SceneTransition sceneTransition;
     [SerializeField] private Transform gameContainer;
 
