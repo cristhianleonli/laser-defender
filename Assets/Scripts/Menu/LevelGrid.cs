@@ -1,33 +1,30 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Data;
+using UnityEngine.UI;
 
 public class LevelGrid : MonoBehaviour
 {
     [SerializeField] private LevelPanel levelPrefab;
 
-    private GridLayout gridLayout;
+    private GridLayoutGroup gridLayout;
     private readonly List<LevelPanel> panels = new List<LevelPanel>();
 
     void Start()
     {
-        gridLayout = GetComponent<GridLayout>();
+        gridLayout = GetComponent<GridLayoutGroup>();
         SetupLevels();
     }
 
     private void SetupLevels()
     {
-        //var children = GetComponentsInChildren<LevelPanel>();
         var levels = DataManager.FetchLevels();
-
         for (int i = 0; i < levels.Count; i++)
         {
-            //children[i].SetLevel(levels[i]);
-            //children[i].OnTapped += OnLevelPanelTapped;
-            //panels.Add(children[i]);
-
-            //Instantiate(levelPrefab, )
-            //gridLayout.CellToWorld
+            LevelPanel levelPanel = Instantiate(levelPrefab, gridLayout.transform);
+            levelPanel.SetLevel(levels[i]);
+            levelPanel.OnTapped += OnLevelPanelTapped;
+            panels.Add(levelPanel);
         }
     }
 
