@@ -138,7 +138,8 @@ public class LevelController : MonoBehaviour
     {
         gameStatus = GameStatus.Finished;
 
-        endOverlay.FadeIn();
+        // TODO: get the right amount of earned stars
+        endOverlay.FadeIn(3);
         player.StopMoving();
         asteroidSpawner.StopSpawning();
 
